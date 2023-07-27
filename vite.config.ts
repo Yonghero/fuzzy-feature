@@ -16,11 +16,11 @@ export default defineConfig({
 
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/index.ts'),
-      name: 'pkg-name',
-      fileName: format => `pkg-name.${format}.js`,
+      entry: path.resolve(__dirname, './packages/index.ts'),
+      name: 'fuzzy-feature',
+      fileName: format => `fuzzy-feature.${format}.js`,
     },
-    outDir: path.resolve(__dirname, './lib'),
+    outDir: path.resolve(__dirname, './dist'),
     // emptyOutDir: false,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

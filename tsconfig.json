@@ -11,7 +11,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "dist/types"
   },
-  "include": ["vite.config.ts", "src/**/*"]
+  "include": ["packages/**/*"]
 }

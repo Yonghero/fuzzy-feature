@@ -1,2 +1,2 @@
-# starter-vuejsx
+# Fuzzy Feature
 Starter template for TypeScript VueJSx library
