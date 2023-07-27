@@ -1,17 +1,17 @@
 {
-  "name": "pkg-name",
+  "name": "fuzzy-feature",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.0",
   "packageManager": "pnpm@8.6.10",
   "description": "",
   "author": "Younghero",
   "license": "MIT",
-  "homepage": "https://github.com/Yonghero/pkg-name#readme",
+  "homepage": "https://github.com/Yonghero/fuzzy-feature#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yonghero/pkg-name.git"
+    "url": "git+https://github.com/Yonghero/fuzzy-feature.git"
   },
-  "bugs": "https://github.com/Yonghero/pkg-name/issues",
+  "bugs": "https://github.com/Yonghero/fuzzy-feature/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
@@ -38,9 +38,7 @@
   "scripts": {
     "build": "rimraf lib && vite build && tsc -p ./tsconfig.json",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "peerdependencies": {
@@ -60,7 +58,6 @@
     "@vue/compiler-sfc": "^3.3.4",
     "bumpp": "^9.1.1",
     "eslint": "^8.45.0",
-    "esno": "^0.17.0",
     "lint-staged": "^13.2.3",
     "pnpm": "^8.6.10",
     "rimraf": "^5.0.1",
