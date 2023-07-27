@@ -12,11 +12,12 @@ export default defineConfig({
     // alias: {
     //   '@/': `${path.resolve(__dirname, './packages')}/`,
     // },
+    extensions: ['.tsx', '.ts'],
   },
 
   build: {
     lib: {
-      entry: path.resolve(__dirname, './packages/index.ts'),
+      entry: path.resolve(__dirname, './src/index.ts'),
       name: 'fuzzy-feature',
       fileName: format => `fuzzy-feature.${format}.js`,
     },

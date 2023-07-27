@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "esnext",
+    "useDefineForClassFields": true,
     "module": "esnext",
-    "lib": ["esnext"],
-    "jsx": "preserve",
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "strict": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "jsx": "preserve",
+    "sourceMap": true,
     "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
     "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "skipLibCheck": true,
     "outDir": "dist/types"
   },
-  "include": ["packages/**/*"]
+  "include": ["src/**/*"]
 }
