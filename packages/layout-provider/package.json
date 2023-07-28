@@ -1,0 +1,20 @@
+{
+  "name": "@fuzzy-feature/layout-provider",
+  "version": "0.0.0",
+  "description": "On the background management system Fuzzy Provides one - stop add, delete, change and check configurable component",
+  "author": "younghero",
+  "license": "ISC",
+  "keywords": [
+    "layout-provider"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    }
+  },
+  "types": "./types-layout-provider.ts",
+  "files": [
+    "dist",
+    "lib"
+  ]
+}

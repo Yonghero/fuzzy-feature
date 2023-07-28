@@ -1,0 +1,20 @@
+{
+  "name": "@fuzzy-feature/renderer",
+  "version": "0.0.0",
+  "description": "On the background management system Fuzzy Provides one - stop add, delete, change and check configurable component",
+  "author": "younghero",
+  "license": "ISC",
+  "keywords": [
+    "renderer"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    }
+  },
+  "types": "./types-renderer.ts",
+  "files": [
+    "dist",
+    "lib"
+  ]
+}

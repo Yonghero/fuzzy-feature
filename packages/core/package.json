@@ -1,0 +1,20 @@
+{
+  "name": "@fuzzy-feature/core",
+  "version": "0.0.0",
+  "description": "On the background management system Fuzzy Provides one - stop add, delete, change and check configurable component",
+  "author": "younghero",
+  "license": "ISC",
+  "keywords": [
+    "runtime-core"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    }
+  },
+  "types": "./src/types.ts",
+  "files": [
+    "dist",
+    "lib"
+  ]
+}

@@ -23,7 +23,7 @@
   },
   "main": "./dist/fuzzy-next.es.js",
   "module": "./dist/fuzzy-next.es.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/types",
   "typesVersions": {
     "*": {
       "*": [

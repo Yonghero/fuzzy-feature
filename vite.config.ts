@@ -9,20 +9,20 @@ export default defineConfig({
     vueJsx(),
   ],
   resolve: {
-    // alias: {
-    //   '@/': `${path.resolve(__dirname, './packages')}/`,
-    // },
+    alias: {
+      'packages/': `${path.resolve(__dirname, './packages')}/`,
+    },
     extensions: ['.tsx', '.ts'],
   },
 
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/index.ts'),
+      entry: path.resolve(__dirname, './packages/core/index.ts'),
       name: 'fuzzy-feature',
       fileName: format => `fuzzy-feature.${format}.js`,
     },
     outDir: path.resolve(__dirname, './dist'),
-    // emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue', 'element-plus', 'elementPlus'],
