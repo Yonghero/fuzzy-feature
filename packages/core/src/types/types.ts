@@ -10,19 +10,15 @@ export interface ImplPlugins {
 }
 
 export enum AppProviderKey {
-  Renderer = 'renderer',
-  Http = 'http',
-  Layout = 'layout',
   Lang = 'lang',
   Paging = 'paging',
 }
 
 export interface AppProvider {
-  renderer: any
-  http: any
   lang: {
     update: string
     delete: string
+    create: string
   }
   paging: {
     current: string

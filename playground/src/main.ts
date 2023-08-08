@@ -5,12 +5,11 @@ import FuzzyUI from '@hitotek/fuzzy-ui'
 import { DefaultLayoutProvider, FuzzyUIRenderer, createFuzzyApp } from '../../packages/core/index'
 import App from './App.vue'
 
-import 'element-plus/dist/index.css'
-
 import '@hitotek/fuzzy-ui/style' // UI 样式
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
+import 'element-plus/dist/index.css'
 
 const fuzzyApp = createFuzzyApp({
   renderer: FuzzyUIRenderer,
@@ -19,6 +18,7 @@ const fuzzyApp = createFuzzyApp({
   lang: {
     update: '编辑',
     delete: '删除',
+    create: '新增',
   },
   paging: {
     current: 'current',

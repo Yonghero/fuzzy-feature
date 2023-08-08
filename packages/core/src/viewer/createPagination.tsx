@@ -4,7 +4,7 @@ import type { OptionsConfiguration } from '../types/options'
 import type { DataProvider } from '../types/provider'
 
 export function createPagination(renderer: PaginationRenderer, options: OptionsConfiguration, provider: DataProvider) {
-  const Pagination = defineComponent({
+  return defineComponent({
 
     setup() {
       function handleSizeChange(size) {
@@ -27,6 +27,4 @@ export function createPagination(renderer: PaginationRenderer, options: OptionsC
       )
     },
   })
-
-  return (<Pagination/>)
 }

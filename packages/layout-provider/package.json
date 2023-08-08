@@ -12,7 +12,7 @@
       "import": "./index.ts"
     }
   },
-  "types": "./types-layout-provider.ts",
+  "types": "./types.ts",
   "files": [
     "dist",
     "lib"

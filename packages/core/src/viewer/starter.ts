@@ -6,6 +6,7 @@ import { createTable } from './createTable'
 import { createDataProvider } from './createDataProvider'
 import { createPagination } from './createPagination'
 import { createDialogForm } from './createDialogForm'
+import { createExtra } from './createExtra'
 
 export interface StarterOptions {
   renderer: Renderer
@@ -13,11 +14,15 @@ export interface StarterOptions {
   http: HttpAdapters
 }
 
-export function starter({ renderer, options, http }) {
+export function starter({ renderer, options, http, activated }) {
+  // 全局数据提供者
   const provider = createDataProvider()
 
   // 创建查询组件
   const filter = createFilter(renderer.filter.render, options)
+
+  // 创建扩展组件
+  const extra = createExtra(renderer, options, activated.extraRenderer.value)
 
   // 创建表格组件
   const table = createTable(renderer, options, provider)
@@ -34,6 +39,7 @@ export function starter({ renderer, options, http }) {
       table,
       pagination,
       dialogForm,
+      extra,
     },
   }
 }

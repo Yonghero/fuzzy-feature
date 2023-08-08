@@ -11,9 +11,6 @@ export const appProvider = new Map<AppProviderKey, any>()
  * @param options
  */
 export function injectAppProvider(options: AppProvider) {
-  if (options.renderer)
-    appProvider.set(AppProviderKey.Renderer, options.renderer)
-
   if (options.lang)
     appProvider.set(AppProviderKey.Lang, options.lang)
 

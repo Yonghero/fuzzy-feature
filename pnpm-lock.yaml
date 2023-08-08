@@ -9,7 +9,7 @@ importers:
       '@antfu/utils': ^0.7.5
       '@babel/core': ^7.22.9
       '@babel/preset-env': ^7.22.9
-      '@hitotek/fuzzy-ui': ^1.0.5
+      '@hitotek/fuzzy-ui': ^1.0.7
       '@types/node': ^20.4.5
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
@@ -34,7 +34,7 @@ importers:
       '@antfu/utils': 0.7.5
       '@babel/core': 7.22.9
       '@babel/preset-env': 7.22.9_@babel+core@7.22.9
-      '@hitotek/fuzzy-ui': 1.0.5
+      '@hitotek/fuzzy-ui': 1.0.7
       '@types/node': 20.4.5
       '@vitejs/plugin-vue': 4.2.3_vite@4.4.7+vue@3.3.4
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.4.7+vue@3.3.4
@@ -69,7 +69,7 @@ importers:
   playground:
     specifiers:
       '@antfu/eslint-config': ^0.39.8
-      '@hitotek/fuzzy-ui': ^1.0.5
+      '@hitotek/fuzzy-ui': ^1.0.7
       '@iconify-json/carbon': ^1.1.18
       '@types/node': ^20.4.5
       '@unocss/eslint-config': ^0.53.6
@@ -101,7 +101,7 @@ importers:
       vue-router: 4.2.4_vue@3.3.4
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
-      '@hitotek/fuzzy-ui': 1.0.5
+      '@hitotek/fuzzy-ui': 1.0.7
       '@iconify-json/carbon': 1.1.18
       '@types/node': 20.4.5
       '@unocss/eslint-config': 0.53.6_eslint@8.45.0+typescript@5.1.6
@@ -120,9 +120,9 @@ importers:
       unplugin-auto-import: 0.16.6_@vueuse+core@10.2.1
       unplugin-vue-components: 0.25.1_vue@3.3.4
       unplugin-vue-macros: 2.4.0_b9a5ded7b121b5958d2c8f1d4cb08ebf
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
       vite-plugin-pages: 0.31.0_31a8e064cd7c04ec720cf871d96124cc
-      vitest: 0.31.4_jsdom@22.1.0
+      vitest: 0.31.4_jsdom@22.1.0+sass@1.64.2
       vue-tsc: 1.8.8_typescript@5.1.6
 
 packages:
@@ -1706,8 +1706,8 @@ packages:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: true
 
-  /@hitotek/fuzzy-ui/1.0.5:
-    resolution: {integrity: sha512-1+PDWU8ZrCs+tIdUgvU+iK+k3CViv6YVWd9LBBr5YhNNSBfFaYIbRDUAcG7sxkNODEiba2hzBZ7bAF3jqTi0FQ==}
+  /@hitotek/fuzzy-ui/1.0.7:
+    resolution: {integrity: sha512-wi8R0asW/gluATUD/E3elhxBwYDLVc9UhyefNOmzQD9VFLvIJOwMrBnuV8E0rgs5mFfwQ1Hj5c/zlX+FSyejoQ==}
     dependencies:
       sortablejs: 1.15.0
     dev: true
@@ -2485,7 +2485,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.1
       magic-string: 0.30.1
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -2840,7 +2840,7 @@ packages:
         optional: true
     dependencies:
       sirv: 2.0.3
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
       vue: 3.3.4
     dev: true
 
@@ -7398,7 +7398,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.5
       unplugin: 1.4.0
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
     dev: true
 
   /unplugin-vue-components/0.25.1_vue@3.3.4:
@@ -7537,7 +7537,7 @@ packages:
       builtins: 5.0.1
     dev: true
 
-  /vite-node/0.31.4_@types+node@20.4.5:
+  /vite-node/0.31.4_@types+node@20.4.5+sass@1.64.2:
     resolution: {integrity: sha512-uzL377GjJtTbuc5KQxVbDu2xfU/x0wVjUtXQR2ihS21q/NK6ROr4oG0rsSkBBddZUVCwzfx22in76/0ZZHXgkQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -7547,7 +7547,7 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7577,46 +7577,10 @@ packages:
       json5: 2.2.3
       local-pkg: 0.4.3
       picocolors: 1.0.0
-      vite: 4.4.7_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
       yaml: 2.3.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /vite/4.4.7_@types+node@20.4.5:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.4.5
-      esbuild: 0.18.17
-      postcss: 8.4.27
-      rollup: 3.26.3
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite/4.4.7_@types+node@20.4.5+sass@1.64.2:
@@ -7656,7 +7620,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.31.4_jsdom@22.1.0:
+  /vitest/0.31.4_jsdom@22.1.0+sass@1.64.2:
     resolution: {integrity: sha512-GoV0VQPmWrUFOZSg3RpQAPN+LPmHg2/gxlMNJlyxJihkz6qReHDV6b0pPDcqFLNEPya4tWJ1pgwUNP9MLmUfvQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -7710,8 +7674,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.5.0
-      vite: 4.4.7_@types+node@20.4.5
-      vite-node: 0.31.4_@types+node@20.4.5
+      vite: 4.4.7_@types+node@20.4.5+sass@1.64.2
+      vite-node: 0.31.4_@types+node@20.4.5+sass@1.64.2
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

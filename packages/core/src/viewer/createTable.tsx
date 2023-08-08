@@ -9,14 +9,19 @@ import { getAppProviderValue } from './provider'
 export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider) {
   const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, 'table')
 
-  const Table = defineComponent({
+  return defineComponent({
     setup() {
       const visibleDeleteDialog = ref(false)
 
-      if (options?.feature?.delete || options.feature?.update) {
+      const deleteVisible = options?.feature?.delete
+      const updateVisible = options?.feature?.update
+
+      if (deleteVisible || updateVisible) {
+        if (templates.some(tmpl => tmpl.label === '操作'))
+          return
         templates.push({
           label: '操作',
-          width: options.table?.actionWidth ?? '180px',
+          width: options.table?.actionWidth ?? '150px',
           value: 'fuzzy-table-action-column',
           visible: {
             table: true,
@@ -24,7 +29,9 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
           render({ scope }) {
             // 编辑
             const UpdateRender = (
-              <renderer.button.render type="primary"
+              <renderer.button.render
+                type="primary"
+                link
                 onClick={() => {
                   provider.dialog.value.data = { ...scope.row }
                   nextTick(() => {
@@ -40,7 +47,9 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
             // 删除
             const DeleteRender = (
               <>
-                <renderer.button.render type="danger"
+                <renderer.button.render
+                  type="danger"
+                  link
                   onClick={() => {
                     visibleDeleteDialog.value = true
                   }}
@@ -58,8 +67,8 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
             }
             return (
               <div class="w-full flex justify-center items-center gap-x-2">
-                {UpdateRender}
-                {DeleteRender}
+                {updateVisible ? UpdateRender : null}
+                {deleteVisible ? DeleteRender : null}
               </div>
             )
           },
@@ -102,6 +111,4 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       )
     },
   })
-
-  return (<Table/>)
 }

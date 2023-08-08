@@ -13,8 +13,11 @@ export const DefaultLayoutProvider = defineComponent({
     return () => (
       <div class="w-full h-full overflow-hidden flex flex-col justify-between">
         {/* height: 100% - 分页器的高度 */}
-        <div class="w-full h-[calc(100%-65px)]">
-          <props.renderer.menu.render/>
+        <div class="w-full h-[calc(100%-65px)] relative">
+          <props.renderer.menu class="relative z-1"/>
+          <div class="absolute top-[4.2rem] right-1 z-2">
+            <props.renderer.extra/>
+          </div>
           <props.renderer.filter/>
           {/* height: 100% - （tabMenu的高度 + filter区域的高度) */}
           <div class="w-full px-1 h-[calc(100%-108px)]">

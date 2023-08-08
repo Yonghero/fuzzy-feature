@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { DataProvider } from '../core/createDataProvide'
+import type { DataProvider } from '../types/provider'
 
 /**
  * 该文件暴露调用内部数据和方法, 可以在外部调用更加灵活处理
@@ -19,7 +19,7 @@ export async function $shallowUpdate(params = {}) {
 }
 
 export function $insideReactiveValue() {
-  return workInProgressFuzzy.dataProvider.value.value
+  return workInProgressFuzzy.dataProvider.value
 }
 
 /**

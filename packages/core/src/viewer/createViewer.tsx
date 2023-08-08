@@ -1,12 +1,16 @@
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import type { Adapters, Renderer } from 'packages/renderer'
+import { computed, defineComponent } from 'vue'
+import type { Adapters, ExtraRenderer, Renderer } from 'packages/renderer'
 import type { HttpAdapters } from 'packages/http'
 import type { LayoutProvider } from 'packages/layout-provider'
+import { FYButton } from '@hitotek/fuzzy-ui'
 import type { OptionsConfiguration } from '../types/options'
+import type { Handlers } from '../types/handlers'
+import { useActivated } from '../utils/useActivated'
 import { injectAppProvider } from './provider'
 import { starter } from './starter'
-import { testOptions } from './test-options'
+import { mergeOptions } from './test-options'
+import { createMenu } from './createMenu'
 
 /**
  * 创建Fuzzy组件
@@ -28,29 +32,46 @@ export function createViewer(adapters: Adapters) {
         type: Object as PropType<LayoutProvider>,
         default: () => adapters.layout,
       },
+      extraRenderer: {
+        type: Array as (PropType<ExtraRenderer>),
+        default: () => ([<FYButton type="success">趋势分析</FYButton>]),
+      },
       options: {
         type: Object as PropType<OptionsConfiguration>,
-        default: () => (testOptions),
+        default: () => (mergeOptions),
       },
       title: {
         type: String, // 多tab栏时需要
+        default: 'Fuzzy',
+      },
+      handlers: {
+        type: Object as (PropType<Handlers>),
+        default: () => ({}),
       },
     },
     setup(props) {
+      // 注入应用配置
       injectAppProvider({
-        renderer: props.renderer,
-        http: props.http,
         lang: adapters.lang,
         paging: adapters.paging,
       })
 
-      const renderer = props.renderer
-      const http = props.http
-      const options = props.options
+      const { menu, activeTabIdx } = createMenu(props.renderer.menu.render, computed(() => props))
 
-      const { components } = starter({ renderer, http, options })
-      // @ts-expect-error anyway
-      return () => <props.layout renderer={{ ...props.renderer, ...components }}></props.layout>
+      const activated = useActivated(computed(() => props), activeTabIdx)
+
+      const dynamicLayout = computed(() => {
+        const renderer = props.renderer
+        const http = props.http
+        const options = activated.options.value
+        const { components } = starter({ renderer, http, options, activated })
+        return (
+          // @ts-expect-error anyway
+          <props.layout renderer={{ menu, ...components }}></props.layout>
+        )
+      })
+
+      return () => (<>{dynamicLayout.value}</>)
     },
   })
 }

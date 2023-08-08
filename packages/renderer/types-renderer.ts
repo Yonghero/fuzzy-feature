@@ -43,8 +43,6 @@ export interface Renderer {
   button: ButtonRenderer | any
   menu: MenuRenderer
   pagination: PaginationRenderer
-  form: FormRenderer
-  dialog: DialogRenderer
   dialogForm: DialogFormRenderer | any
 }
 
@@ -58,6 +56,7 @@ export interface Adapters {
   lang: {
     update: string
     delete: string
+    create: string
   }
   paging: {
     current: string
@@ -68,3 +67,5 @@ export interface Adapters {
 export interface FuzzyPlugins {
 
 }
+
+export type ExtraRenderer = Component[] | Element[] | VNode[]

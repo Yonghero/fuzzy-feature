@@ -5,6 +5,8 @@ export interface LayoutRenderer {
   table: any
   pagination: any
   dialogForm: any
+  menu: any
+  extra: any
 }
 
 export interface LayoutProviderProps {
