@@ -1,5 +1,5 @@
 import type { Adapters } from 'packages/renderer'
-import type { App } from './types'
+import type { App } from './types/types'
 import { createViewer } from './viewer'
 
 /**
@@ -8,15 +8,9 @@ import { createViewer } from './viewer'
  * @returns
  */
 export function createFuzzyApp(adapters: Adapters): App {
-  /**
-   * fuzzy 应用安装
-   * @param name 组件名称
-   * @returns
-   */
-  function install(name) {
-    return function vueAppInstall(app) {
-      app.component(name, createViewer(adapters))
-    }
+  function install(app, options?) {
+    const appName = options?.name ?? 'FuzzyViewer'
+    app.component(appName, createViewer(adapters))
   }
 
   function use() {

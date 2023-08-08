@@ -1,4 +1,4 @@
 export * from './src'
-export * from 'packages/renderer'
-export * from 'packages/http'
-export * from 'packages/layout-provider'
+export * from '../renderer/index'
+export * from '../http/index'
+export * from '../layout-provider/index'

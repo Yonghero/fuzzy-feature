@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
+    "@hitotek/fuzzy-ui": "^1.0.5",
     "@iconify-json/carbon": "^1.1.18",
     "@types/node": "^20.4.5",
     "@unocss/eslint-config": "^0.53.6",

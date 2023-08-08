@@ -1,1 +1,2 @@
-export * from './types-layout-provider'
+export * from './types'
+export * from './src/default-layout-provider'

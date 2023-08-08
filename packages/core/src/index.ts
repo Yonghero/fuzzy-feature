@@ -1,3 +1,3 @@
 export * from './setup'
-export * from './types'
+export * from './types/types'
 export * from './viewer'

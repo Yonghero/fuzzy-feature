@@ -2,7 +2,7 @@ module.exports = {
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' } }],
   ],
-  // plugins: [
-  //   ['@vue/babel-plugin-jsx', { mergeProps: false }],
-  // ],
+  plugins: [
+    ['@vue/babel-plugin-jsx', { mergeProps: true }],
+  ],
 }

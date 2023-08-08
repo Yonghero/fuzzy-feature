@@ -1,5 +1,6 @@
 import * as path from 'node:path'
 import { defineConfig } from 'vite'
+import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
@@ -7,6 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    UnoCSS(),
   ],
   resolve: {
     alias: {

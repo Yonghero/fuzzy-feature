@@ -1,17 +1,18 @@
-import type { DefineComponent } from 'vue'
-import type { LayoutProvider } from '../layout-provider/types-layout-provider'
+import type { Component, DefineComponent, VNode } from 'vue'
+import type { Templates } from 'packages/core/src/types/options'
 import type { HttpAdapters } from '../http'
+import type { LayoutProvider } from './../layout-provider/types'
 
 export interface FilterRenderer {
-  render: DefineComponent
+  render: Component<{ templates: Templates[] }>
 }
 
 export interface TableRenderer {
-  render: DefineComponent
+  render: Component<{ templates: Templates[]; data: any[] }>
 }
 
 export interface ButtonRenderer {
-  render: DefineComponent
+  render: Component<{ type: string }> | VNode | JSX.Element
 }
 
 export interface MenuRenderer {
@@ -30,17 +31,21 @@ export interface DialogRenderer {
   render: DefineComponent
 }
 
+export interface DialogFormRenderer {
+  render: Component<{ dialogConfig: Record<string, any> }>
+}
 /**
  * 渲染器
  */
 export interface Renderer {
   filter: FilterRenderer
-  table: TableRenderer
-  button: ButtonRenderer
+  table: TableRenderer | any
+  button: ButtonRenderer | any
   menu: MenuRenderer
   pagination: PaginationRenderer
   form: FormRenderer
   dialog: DialogRenderer
+  dialogForm: DialogFormRenderer | any
 }
 
 /**
@@ -50,6 +55,14 @@ export interface Adapters {
   renderer: Renderer
   http: HttpAdapters
   layout: LayoutProvider
+  lang: {
+    update: string
+    delete: string
+  }
+  paging: {
+    current: string
+    size: string
+  }
 }
 
 export interface FuzzyPlugins {
