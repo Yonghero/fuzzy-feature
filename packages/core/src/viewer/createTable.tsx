@@ -34,6 +34,7 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
                 type="primary"
                 link
                 onClick={async () => {
+                  // 编辑前hook注入
                   if (handlers.updateBeforePop) {
                     const row = await handlers.updateBeforePop({ data: { ...scope.row } })
                     provider.dialog.value.data = { row }
@@ -87,6 +88,7 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       // 确定删除
       async function handleDeleteConfirm() {
         let data = { ...provider.dialog.value.data }
+        // 删除前hook注入
         if (handlers.deleteBefore)
           data = await handlers.deleteBefore({ data: { ...provider.dialog.value.data } })
 
