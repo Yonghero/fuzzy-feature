@@ -31,8 +31,9 @@ export default defineConfig({
       output: {
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
-          vue: 'Vue',
-          // 'element-plus': 'ElementPlus',
+          'vue': 'Vue',
+          'element-plus': 'ElementPlus',
+          '@hitotek/fuzzy-ui': '@hitotek/fuzzy-ui',
         },
       },
     },

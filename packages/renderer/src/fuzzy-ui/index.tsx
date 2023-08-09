@@ -7,6 +7,8 @@ import { FuzzyUIPaginationRenderer } from './FuzzyUIPaginationRenderer'
 import { FuzzyUIMenuRenderer } from './FuzzyUIMenuRenderer'
 import { FuzzyUIMessageRenderer } from './FuzzyUIMessageRenderer'
 
+import 'uno.css'
+
 export class FuzzyUIRenderer implements Renderer {
   filter = new FuzzyUIFilterRenderer()
   table = new FuzzyUITableRenderer()

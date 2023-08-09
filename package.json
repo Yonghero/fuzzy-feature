@@ -17,12 +17,15 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "require": "./dist/fuzzy-next.umd.js",
-      "import": "./dist/fuzzy-next.es.js"
+      "require": "./dist/fuzzy-feature.umd.js",
+      "import": "./dist/fuzzy-feature.es.js"
+    },
+    "./style": {
+      "import:": "./dist/style.css"
     }
   },
-  "main": "./dist/fuzzy-next.es.js",
-  "module": "./dist/fuzzy-next.es.js",
+  "main": "./dist/fuzzy-feature.es.js",
+  "module": "./dist/fuzzy-feature.es.js",
   "types": "./dist/types",
   "typesVersions": {
     "*": {
@@ -42,10 +45,9 @@
     "typecheck": "tsc --noEmit"
   },
   "peerdependencies": {
+    "@hitotek/fuzzy-ui": "^1.0.8",
+    "element-plus": "^2.3.9",
     "vue": "^3.2.26"
-  },
-  "dependencies": {
-    "@vueuse/core": "^10.3.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
@@ -61,6 +63,7 @@
     "@vue/babel-plugin-jsx": "^1.1.5",
     "@vue/babel-preset-jsx": "^1.4.0",
     "@vue/compiler-sfc": "^3.3.4",
+    "@vueuse/core": "^10.3.0",
     "bumpp": "^9.1.1",
     "element-plus": "^2.3.9",
     "eslint": "^8.45.0",
