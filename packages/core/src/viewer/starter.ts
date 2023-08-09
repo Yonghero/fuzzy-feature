@@ -19,7 +19,7 @@ export function starter({ renderer, options, http, activated }) {
   const provider = createDataProvider()
 
   // 创建查询组件
-  const filter = createFilter(renderer.filter.render, options)
+  const filter = createFilter(renderer.filter, options)
 
   // 创建扩展组件
   const extra = createExtra(renderer, options, activated.extraRenderer.value)
@@ -28,10 +28,10 @@ export function starter({ renderer, options, http, activated }) {
   const table = createTable(renderer, options, provider)
 
   // 创建分页组件
-  const pagination = createPagination(renderer.pagination.render, options, provider)
+  const pagination = createPagination(renderer.pagination, options, provider)
 
   // 创建表单对话框
-  const dialogForm = createDialogForm(renderer.dialogForm.render, options, provider)
+  const dialogForm = createDialogForm(renderer.dialogForm, options, provider)
 
   return {
     components: {

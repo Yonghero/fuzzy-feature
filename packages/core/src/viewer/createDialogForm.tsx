@@ -1,10 +1,10 @@
-import type { DialogFormRenderer } from 'packages/renderer/types-renderer'
 import { computed, defineComponent, unref } from 'vue'
+import type { DialogFormRenderer } from 'packages/renderer/types-renderer'
 import type { OptionsConfiguration } from '../types/options'
 import type { DataProvider } from '../types/provider'
 import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 
-export function createDialogForm(renderer: DialogFormRenderer, options: OptionsConfiguration, provider: DataProvider) {
+export function createDialogForm(DialogForm: DialogFormRenderer, options: OptionsConfiguration, provider: DataProvider) {
   return defineComponent({
     setup() {
       const dialogConfig = computed(() => ({
@@ -20,8 +20,8 @@ export function createDialogForm(renderer: DialogFormRenderer, options: OptionsC
         provider.dispatch.setDialog({ visible: false })
       }
       return () => (
-        <renderer
-          modelValue={unref(provider.dialog.value.visible)}
+        <DialogForm.render
+          v-model={provider.dialog.value.visible}
           dialogConfig={unref(dialogConfig)}
           formModel={provider.dialog.value.data}
           onSubmit={handleSubmit}

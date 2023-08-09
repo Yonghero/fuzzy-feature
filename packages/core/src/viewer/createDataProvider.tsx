@@ -39,6 +39,7 @@ export function createDataProvider(): DataProvider {
     tableLoading.value = false
   }, 2000)
 
+  // 对话框
   const dialog = ref<DialogProps>({
     visible: false,
     type: 'update',
@@ -48,40 +49,41 @@ export function createDataProvider(): DataProvider {
 
   const dialogVisible = ref(false)
 
-  const dispatch = {
-    setFilterParams(params) {
-      filterParams.value = { ...filterParams.value, ...params }
-    },
-    setTableData(data) {
-      tableData.value = data
-    },
-    setTotal(num) {
-      total.value = num
-    },
-    setTableLoading(loading) {
-      tableLoading.value = loading
-    },
-    setDialog(props: Partial<DialogProps>) {
-      dialog.value = { ...dialog.value, ...props }
-    },
-    setCurrentPage(page) {
-      currentPage.value = page
-    },
-    setPageSize(size) {
-      pageSize.value = size
-    },
-  }
-
   workInProgressFuzzy.dataProvider.value = computed(() => {
     return {
       filterParams: filterParams.value,
       tableData: tableData.value,
       total: total.value,
+      tableLoading: tableLoading.value,
+      currentPage: currentPage.value,
+      pageSize: pageSize.value,
     }
   })
 
   return {
-    dispatch,
+    dispatch: {
+      setFilterParams(params) {
+        filterParams.value = { ...filterParams.value, ...params }
+      },
+      setTableData(data) {
+        tableData.value = data
+      },
+      setTotal(num) {
+        total.value = num
+      },
+      setTableLoading(loading) {
+        tableLoading.value = loading
+      },
+      setDialog(props: Partial<DialogProps>) {
+        dialog.value = { ...dialog.value, ...props }
+      },
+      setCurrentPage(page) {
+        currentPage.value = page
+      },
+      setPageSize(size) {
+        pageSize.value = size
+      },
+    },
     filterParams,
     tableData,
     total,

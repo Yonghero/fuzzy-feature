@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import type { OptionsConfiguration } from '../types/options'
 import type { DataProvider } from '../types/provider'
 
-export function createPagination(renderer: PaginationRenderer, options: OptionsConfiguration, provider: DataProvider) {
+export function createPagination(Pagination: PaginationRenderer, options: OptionsConfiguration, provider: DataProvider) {
   return defineComponent({
 
     setup() {
@@ -14,7 +14,7 @@ export function createPagination(renderer: PaginationRenderer, options: OptionsC
         provider.dispatch.setCurrentPage(current)
       }
       return () => (
-        <renderer
+        <Pagination.render
           currentPage={unref(provider.currentPage)}
           pageSize={unref(provider.pageSize)}
           page-sizes={[20, 50, 100]}

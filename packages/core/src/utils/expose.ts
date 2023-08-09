@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import type { DataProvider } from '../types/provider'
+import type { ComputedRef } from 'vue'
+import type { WorkInData } from '../types/provider'
 
 /**
  * 该文件暴露调用内部数据和方法, 可以在外部调用更加灵活处理
@@ -7,7 +8,7 @@ import type { DataProvider } from '../types/provider'
 
 export const workInProgressFuzzy = {
   shallowUpdate: (p?: any) => p,
-  dataProvider: ref<DataProvider>(),
+  dataProvider: ref<ComputedRef<WorkInData>>(),
 }
 
 /**

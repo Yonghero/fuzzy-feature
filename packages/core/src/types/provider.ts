@@ -31,3 +31,11 @@ export interface DialogProps {
   type: 'update' | 'create'
   title: string
 }
+
+export interface WorkInData {
+  filterParams: Record<string, any>
+  tableData: any[]
+  currentPage: number
+  total: number
+  tableLoading: boolean
+}

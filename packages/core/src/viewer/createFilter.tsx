@@ -2,8 +2,8 @@ import type { FilterRenderer } from 'packages/renderer/types-renderer'
 import type { OptionsConfiguration } from '../types/options'
 import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 
-export function createFilter(renderer: FilterRenderer, options: OptionsConfiguration) {
+export function createFilter(Filter: FilterRenderer, options: OptionsConfiguration) {
   return (
-    <renderer templates={templateMiddleWare([mapTemplatesOfFeature, mapTemplateDefaultValue, mapTemplatesRenderer])(options.templates, 'filter')}></renderer>
+    <Filter.render templates={templateMiddleWare([mapTemplatesOfFeature, mapTemplateDefaultValue, mapTemplatesRenderer])(options.templates, 'filter')}/>
   )
 }

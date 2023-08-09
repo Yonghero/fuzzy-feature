@@ -1,6 +1,7 @@
+import type { MenuRenderer } from 'packages/renderer/types-renderer'
 import { computed, defineComponent, ref, unref } from 'vue'
 
-export function createMenu(renderer, refProps) {
+export function createMenu(Menu: MenuRenderer, refProps) {
   const activeTabIdx = ref(0)
 
   const menu = defineComponent({
@@ -55,11 +56,10 @@ export function createMenu(renderer, refProps) {
 
       return () => (
         (
-          <renderer
+          <Menu.render
             config={config.value}
             onSelect={handleSelet}
-          >
-          </renderer>
+          />
         )
       )
     },

@@ -1,5 +1,5 @@
 import type { Renderer } from 'packages/renderer/types-renderer'
-import { defineComponent, nextTick, ref } from 'vue'
+import { defineComponent, nextTick, ref, unref } from 'vue'
 import type { OptionsConfiguration } from '../types/options'
 import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
@@ -88,8 +88,8 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
             templates={templates}
             selection={options?.table?.selection}
             index={options?.table?.index}
-            data={provider.tableData}
-            loading={provider.tableLoading}
+            data={unref(provider.tableData)}
+            loading={unref(provider.tableLoading)}
           />
           <renderer.dialogForm.render
             v-model={visibleDeleteDialog.value}

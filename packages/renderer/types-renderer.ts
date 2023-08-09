@@ -3,47 +3,57 @@ import type { Templates } from 'packages/core/src/types/options'
 import type { HttpAdapters } from '../http'
 import type { LayoutProvider } from './../layout-provider/types'
 
+/**
+ * 筛选面板组件实现
+ */
 export interface FilterRenderer {
-  render: Component<{ templates: Templates[] }>
+  render: DefineComponent<{ templates: Templates[] }>
 }
 
+/**
+ * 表格组件实现
+ */
 export interface TableRenderer {
-  render: Component<{ templates: Templates[]; data: any[] }>
+  render: DefineComponent<{ templates: Templates[]; data: any[]; selection: boolean | undefined; index: boolean | undefined; loading: boolean }>
 }
 
+/**
+ * 按钮组件实现
+ */
 export interface ButtonRenderer {
-  render: Component<{ type: string }> | VNode | JSX.Element
+  render: DefineComponent<{ type: string; link?: boolean; onClick: () => void }>
 }
 
+/**
+ * 菜单组件实现
+ */
 export interface MenuRenderer {
-  render: DefineComponent
+  render: DefineComponent<{ config: { icon: any; title: any; menu: any }; onSelect: ({ key, path, item }) => void }>
 }
 
+/**
+ * 分页组件实现
+ */
 export interface PaginationRenderer {
-  render: DefineComponent
+  render: DefineComponent<{ total: number; onSizeChange: (size) => void; onCurrentChange: (current) => void; currentPage: number; pageSize: number;background: boolean; layout: string }>
 }
 
-export interface FormRenderer {
-  render: DefineComponent
-}
-
-export interface DialogRenderer {
-  render: DefineComponent
-}
-
+/**
+ * 对话框表单组件实现
+ */
 export interface DialogFormRenderer {
-  render: Component<{ dialogConfig: Record<string, any> }>
+  render: DefineComponent<{ 'v-model': boolean; dialogConfig: Record<string, any> ; formModel?: Record<string, any>; onSubmit?: (formModel) => void ; onCancel: (formModel?) => void; onConfirm?: (formModel?) => void }>
 }
 /**
  * 渲染器
  */
 export interface Renderer {
   filter: FilterRenderer
-  table: TableRenderer | any
-  button: ButtonRenderer | any
+  table: TableRenderer
+  button: ButtonRenderer
   menu: MenuRenderer
   pagination: PaginationRenderer
-  dialogForm: DialogFormRenderer | any
+  dialogForm: DialogFormRenderer
 }
 
 /**
