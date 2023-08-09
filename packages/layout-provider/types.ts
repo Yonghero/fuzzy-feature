@@ -1,4 +1,4 @@
-import type { DefineComponent } from 'vue'
+import type { ComponentPublicInstance, DefineComponent } from 'vue'
 
 export interface LayoutRenderer {
   filter: DefineComponent
@@ -13,4 +13,4 @@ export interface LayoutProviderProps {
   renderer: LayoutRenderer
 }
 
-export type LayoutProvider = DefineComponent<{ LayoutProviderProps }>
+export type LayoutProvider = ComponentPublicInstance<any>

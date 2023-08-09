@@ -28,17 +28,6 @@ export function createDataProvider(): DataProvider {
   // 表格是否加载数据中
   const tableLoading = ref(true)
 
-  setTimeout(() => {
-    tableData.value = Array.from({ length: 5 }, (_, idx) => ({
-      fzr: '负责人',
-      bjr: '报警人',
-      date: '2016-05-03',
-      index: idx + 1,
-      name: `${idx}Tom`,
-    }))
-    tableLoading.value = false
-  }, 2000)
-
   // 对话框
   const dialog = ref<DialogProps>({
     visible: false,
@@ -79,9 +68,11 @@ export function createDataProvider(): DataProvider {
       },
       setCurrentPage(page) {
         currentPage.value = page
+        filterParams.value[paging.current] = page
       },
       setPageSize(size) {
         pageSize.value = size
+        filterParams.value[paging.size] = size
       },
     },
     filterParams,

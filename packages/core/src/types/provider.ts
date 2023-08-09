@@ -1,4 +1,5 @@
 import type { Ref } from 'vue'
+import type { Response } from 'packages/http'
 
 export interface ValueOfProvide {
   filterParams: Ref<Record<string, any>>
@@ -38,4 +39,11 @@ export interface WorkInData {
   currentPage: number
   total: number
   tableLoading: boolean
+}
+
+export interface HttpProvider {
+  get (params?): Promise<Required<Response> | undefined>
+  post (params?): Promise<Pick<Response, 'message' | 'success' | 'data'>>
+  delete (params?): Promise<Pick<Response, 'success' | 'message'>>
+  put (params?): Promise<Pick<Response, 'message' | 'success' | 'data'>>
 }

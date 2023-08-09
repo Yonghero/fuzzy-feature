@@ -7,14 +7,14 @@ import type { LayoutProvider } from './../layout-provider/types'
  * 筛选面板组件实现
  */
 export interface FilterRenderer {
-  render: DefineComponent<{ templates: Templates[] }>
+  render: DefineComponent<{ templates: Templates[] }> | any
 }
 
 /**
  * 表格组件实现
  */
 export interface TableRenderer {
-  render: DefineComponent<{ templates: Templates[]; data: any[]; selection: boolean | undefined; index: boolean | undefined; loading: boolean }>
+  render: DefineComponent<{ templates: Templates[]; data: any[]; selection: boolean | undefined; index: boolean | undefined; loading: boolean }> | any
 }
 
 /**
@@ -44,6 +44,10 @@ export interface PaginationRenderer {
 export interface DialogFormRenderer {
   render: DefineComponent<{ 'v-model': boolean; dialogConfig: Record<string, any> ; formModel?: Record<string, any>; onSubmit?: (formModel) => void ; onCancel: (formModel?) => void; onConfirm?: (formModel?) => void }>
 }
+
+export interface MessageRenderer {
+  render: any
+}
 /**
  * 渲染器
  */
@@ -54,6 +58,7 @@ export interface Renderer {
   menu: MenuRenderer
   pagination: PaginationRenderer
   dialogForm: DialogFormRenderer
+  message: MessageRenderer
 }
 
 /**
@@ -67,6 +72,9 @@ export interface Adapters {
     update: string
     delete: string
     create: string
+    success: string
+    warning: string
+    fail: string
   }
   paging: {
     current: string

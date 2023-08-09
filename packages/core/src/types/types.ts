@@ -19,6 +19,9 @@ export interface AppProvider {
     update: string
     delete: string
     create: string
+    success: string
+    warning: string
+    fail: string
   }
   paging: {
     current: string

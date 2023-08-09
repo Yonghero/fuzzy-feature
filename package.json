@@ -44,13 +44,16 @@
   "peerdependencies": {
     "vue": "^3.2.26"
   },
+  "dependencies": {
+    "@vueuse/core": "^10.3.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
     "@antfu/ni": "^0.21.5",
     "@antfu/utils": "^0.7.5",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
-    "@hitotek/fuzzy-ui": "^1.0.7",
+    "@hitotek/fuzzy-ui": "^1.0.8",
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

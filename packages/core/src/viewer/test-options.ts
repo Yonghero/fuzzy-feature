@@ -3,7 +3,7 @@ import { mergeFuzzyOptions } from '../utils/merge'
 
 export const testOptions: OptionsConfiguration = {
   title: 'Tab1',
-  api: undefined,
+  api: '/get/api',
   table: {
 
   },
@@ -16,9 +16,12 @@ export const testOptions: OptionsConfiguration = {
     {
       label: '姓名',
       value: 'name',
+      type: 'input',
+      require: true,
       visible: {
         table: true,
         filter: false,
+        update: true,
       },
     },
     {
@@ -30,6 +33,8 @@ export const testOptions: OptionsConfiguration = {
       },
       visible: {
         filter: true,
+        update: true,
+
       },
     },
     {
@@ -69,6 +74,7 @@ export const testOptions: OptionsConfiguration = {
       },
       visible: {
         filter: false,
+        update: true,
       },
     },
   ],
@@ -76,7 +82,7 @@ export const testOptions: OptionsConfiguration = {
 
 export const testOptions2: OptionsConfiguration = {
   title: 'Tab2',
-  api: undefined,
+  api: '/get/api/2',
   table: {
 
   },

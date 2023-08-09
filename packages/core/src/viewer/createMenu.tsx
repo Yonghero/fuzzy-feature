@@ -51,6 +51,15 @@ export function createMenu(Menu: MenuRenderer, refProps) {
       })
 
       function handleSelet({ key }) {
+        const props = unref(refProps)
+        if (Array.isArray(props.handlers)) {
+          if (props.handlers[activeTabIdx.value].tabChange)
+            props.handlers[activeTabIdx.value].tabChange()
+        }
+        else {
+          if (props.handlers.tabChange)
+            props.handlers.tabChange()
+        }
         activeTabIdx.value = key
       }
 

@@ -56,17 +56,16 @@ export function createViewer(adapters: Adapters) {
         paging: adapters.paging,
       })
 
-      const { menu, activeTabIdx } = createMenu(props.renderer.menu.render, computed(() => props))
+      const { menu, activeTabIdx } = createMenu(props.renderer.menu, computed(() => props))
 
-      const activated = useActivated(computed(() => props), activeTabIdx)
+      // 激活后的组件props
+      const activatedProps = useActivated(computed(() => props), activeTabIdx)
 
       const dynamicLayout = computed(() => {
         const renderer = props.renderer
         const http = props.http
-        const options = activated.options.value
-        const { components } = starter({ renderer, http, options, activated })
+        const { components } = starter({ renderer, http, activatedProps })
         return (
-          // @ts-expect-error anyway
           <props.layout renderer={{ menu, ...components }}></props.layout>
         )
       })

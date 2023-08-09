@@ -1,6 +1,7 @@
 interface HandlerParams {
   data: any
   url?: string
+  prevent?: () => void
 }
 
 export interface Handlers {

@@ -3,10 +3,11 @@ import { defineComponent, nextTick, ref, unref } from 'vue'
 import type { OptionsConfiguration } from '../types/options'
 import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
-import type { DataProvider } from '../types/provider'
+import type { DataProvider, HttpProvider } from '../types/provider'
+import type { Handlers } from '../types/handlers'
 import { getAppProviderValue } from './provider'
 
-export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider) {
+export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers) {
   const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, 'table')
 
   return defineComponent({
@@ -32,10 +33,17 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
               <renderer.button.render
                 type="primary"
                 link
-                onClick={() => {
-                  provider.dialog.value.data = { ...scope.row }
+                onClick={async () => {
+                  if (handlers.updateBeforePop) {
+                    const row = await handlers.updateBeforePop({ data: { ...scope.row } })
+                    provider.dialog.value.data = { row }
+                  }
+                  else {
+                    provider.dialog.value.data = { ...scope.row }
+                  }
+                  provider.dialog.value.type = 'update'
+                  provider.dialog.value.title = getAppProviderValue(AppProviderKey.Lang).update + options.title
                   nextTick(() => {
-                    provider.dialog.value.title = getAppProviderValue(AppProviderKey.Lang).update + options.title
                     provider.dialog.value.visible = true
                   })
                 }}
@@ -51,6 +59,7 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
                   type="danger"
                   link
                   onClick={() => {
+                    provider.dialog.value.data = { ...scope.row }
                     visibleDeleteDialog.value = true
                   }}
                 >
@@ -75,9 +84,33 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
         })
       }
 
-      function handleDeleteConfirm() {
+      // 确定删除
+      async function handleDeleteConfirm() {
+        let data = { ...provider.dialog.value.data }
+        if (handlers.deleteBefore)
+          data = await handlers.deleteBefore({ data: { ...provider.dialog.value.data } })
+
+        const response = await httpProvider.delete(data)
+        const lang = getAppProviderValue(AppProviderKey.Lang)
+
+        // 删除成功
+        if (response.success) {
+          renderer.message.render.success(lang.delete + lang.success)
+
+          // 重新新的表格请求数据
+          if (provider.tableData.value.length === 1 && provider.currentPage.value !== 1)
+            await httpProvider.get({ [getAppProviderValue(AppProviderKey.Paging).current]: provider.currentPage.value - 1 })
+          else
+            await httpProvider.get({})
+        }
+        else {
+          renderer.message.render.warning(response.message)
+        }
+
         visibleDeleteDialog.value = false
       }
+
+      // 取消删除
       function handleDeleteCancel() {
         visibleDeleteDialog.value = false
       }
