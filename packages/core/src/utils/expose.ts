@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-import type { ComputedRef } from 'vue'
 import type { WorkInData } from '../types/provider'
 
 /**
@@ -7,20 +6,31 @@ import type { WorkInData } from '../types/provider'
  */
 
 export const workInProgressFuzzy = {
-  shallowUpdate: (p?: any) => p,
-  dataProvider: ref<ComputedRef<WorkInData>>(),
+  shallowUpdate: p => p,
+  shallowDelete: p => p,
+  dataProvider: ref<WorkInData>(),
 }
 
 /**
- * 只重新请求组件数据，不重新渲染
+ * 请求数据更新
  */
 export async function $shallowUpdate(params = {}) {
   if (workInProgressFuzzy.shallowUpdate)
     return await workInProgressFuzzy.shallowUpdate(params)
 }
 
+/**
+ * 删除数据
+ * @param params
+ * @returns
+ */
+export async function $shallowDelete(params) {
+  if (workInProgressFuzzy.shallowDelete)
+    return await workInProgressFuzzy.shallowDelete(params)
+}
+
 export function $insideReactiveValue() {
-  return workInProgressFuzzy.dataProvider.value
+  return workInProgressFuzzy.dataProvider
 }
 
 /**

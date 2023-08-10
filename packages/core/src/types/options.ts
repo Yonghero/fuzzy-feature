@@ -39,7 +39,7 @@ export interface BaseTemplate {
 }
 
 export interface OptionsConfiguration {
-  title: string
+  title: string | Ref<string>
   api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string> | any
   /**
    * 是否开启增删改查中其中一项功能

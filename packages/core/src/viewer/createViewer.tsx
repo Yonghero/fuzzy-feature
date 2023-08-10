@@ -3,13 +3,12 @@ import { computed, defineComponent } from 'vue'
 import type { Adapters, ExtraRenderer, Renderer } from 'packages/renderer'
 import type { HttpAdapters } from 'packages/http'
 import type { LayoutProvider } from 'packages/layout-provider'
-import { FYButton } from '@hitotek/fuzzy-ui'
 import type { OptionsConfiguration } from '../types/options'
 import type { Handlers } from '../types/handlers'
 import { useActivated } from '../utils/useActivated'
 import { injectAppProvider } from './provider'
 import { starter } from './starter'
-import { mergeOptions } from './test-options'
+import { mergeHandlers, mergeOptions } from './test-options'
 import { createMenu } from './createMenu'
 
 /**
@@ -34,7 +33,7 @@ export function createViewer(adapters: Adapters) {
       },
       extraRenderer: {
         type: Array as (PropType<ExtraRenderer>),
-        default: () => ([<FYButton type="success">趋势分析</FYButton>]),
+        default: () => ([]),
       },
       options: {
         type: Object as PropType<OptionsConfiguration>,
@@ -46,10 +45,10 @@ export function createViewer(adapters: Adapters) {
       },
       handlers: {
         type: Object as (PropType<Handlers>),
-        default: () => ({}),
+        default: () => (mergeHandlers),
       },
     },
-    setup(props) {
+    setup(props, { slots }) {
       // 注入应用配置
       injectAppProvider({
         lang: adapters.lang,
@@ -66,7 +65,7 @@ export function createViewer(adapters: Adapters) {
         const http = props.http
         const { components } = starter({ renderer, http, activatedProps })
         return (
-          <props.layout renderer={{ menu, ...components }}></props.layout>
+          <props.layout renderer={{ menu, ...components }} slots={slots}></props.layout>
         )
       })
 

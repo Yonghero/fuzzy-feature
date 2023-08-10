@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import type { LayoutRenderer } from '../types'
+import { computed, defineComponent } from 'vue'
+import type { LayoutRenderer, LayoutSlots } from '../types'
 
 export const DefaultLayoutProvider = defineComponent({
   props: {
@@ -8,19 +8,23 @@ export const DefaultLayoutProvider = defineComponent({
       type: Object as PropType<LayoutRenderer>,
       required: true,
     },
+    slots: {
+      type: Object as PropType<LayoutSlots>,
+      default: () => ({}),
+    },
   },
   setup(props) {
-    return () => (
-      <div class="w-full h-full overflow-hidden flex flex-col justify-between">
-        {/* height: 100% - 分页器的高度 */}
-        <div class="w-full h-[calc(100%-65px)] relative">
+    const BaseLayout = computed(() => (
+      <>
+       {/* height: 100% - 分页器的高度 */}
+       <div class="w-full h-[calc(100%-65px)] relative">
           <props.renderer.menu class="relative z-1"/>
-          <div class="absolute top-[4.2rem] right-1 z-2">
+          <div class="absolute top-[4.2rem] right-4 z-2">
             <props.renderer.extra/>
           </div>
           <props.renderer.filter/>
           {/* height: 100% - （tabMenu的高度 + filter区域的高度) */}
-          <div class="w-full px-1 h-[calc(100%-108px)]">
+          <div class="w-full h-[calc(100%-108px)]">
             <props.renderer.table/>
           </div>
         </div>
@@ -30,6 +34,28 @@ export const DefaultLayoutProvider = defineComponent({
           </div>
         </div>
         <props.renderer.dialogForm/>
-      </div>)
+      </>
+    ))
+
+    // 树结构存在的布局
+    if (props.slots.tree) {
+      return () => (
+        <div class="flex w-full h-full">
+          <div class="tree basis-1/6 flex-grow-0 overflow-hidden">
+            {props?.slots?.tree()}
+          </div>
+          <div class="basis-5/6 h-full overflow-hidden flex flex-col justify-between">
+              { BaseLayout.value }
+          </div>
+        </div>
+      )
+    }
+
+    // 默认布局
+    return () => (
+      <div class="w-full h-full overflow-hidden flex flex-col justify-between">
+        { BaseLayout.value }
+      </div>
+    )
   },
 })

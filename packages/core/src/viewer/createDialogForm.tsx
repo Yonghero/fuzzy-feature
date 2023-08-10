@@ -1,5 +1,6 @@
 import { computed, defineComponent, unref } from 'vue'
 import type { Renderer } from 'packages/renderer/types-renderer'
+import { FYDialog } from '@hitotek/fuzzy-ui'
 import type { OptionsConfiguration } from '../types/options'
 import type { DataProvider, HttpProvider } from '../types/provider'
 import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
@@ -11,16 +12,16 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
   return defineComponent({
     setup() {
       const dialogConfig = computed(() => ({
-        fullTitle: provider.dialog.value.title,
-        type: provider.dialog.value.type,
-        template: templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, provider.dialog.value.type),
+        fullTitle: provider.dialog.title,
+        type: provider.dialog.type,
+        template: templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, provider.dialog.type),
       }))
 
       async function handleSubmit(formModel) {
         console.log('🚀 ~ file: createDialogForm.tsx:17 ~ handleSubmit ~ formModel:', formModel)
 
         const response = await new Promise((resolve) => {
-          if (provider.dialog.value.type === 'update') {
+          if (provider.dialog.type === 'update') {
             if (handlers.updateConfirm) {
               handlers.updateConfirm({ data: { ...formModel } })
                 .then((data) => {
@@ -49,9 +50,9 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
           if (handlers.updated)
             handlers.updated()
 
-          provider.dispatch.setDialog({ visible: false })
+          provider.dispatch.setDialog({ visible: false, data: {} })
           await httpProvider.get({})
-          renderer.message.render.success(`${unref(provider.dialog.value.title)}${getAppProviderValue(AppProviderKey.Lang).success || '成功'}`)
+          renderer.message.render.success(`${unref(provider.dialog.title)}${getAppProviderValue(AppProviderKey.Lang).success || '成功'}`)
           return
         }
         // 表单提交失败
@@ -59,19 +60,20 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
       }
 
       function handleCancel() {
-        if (handlers.createCancel && provider.dialog.value.type === 'create')
+        if (handlers.createCancel && provider.dialog.type === 'create')
           handlers.createCancel({ data: {} })
 
-        if (handlers.updateCancel && provider.dialog.value.type === 'update')
+        if (handlers.updateCancel && provider.dialog.type === 'update')
           handlers.updateCancel({ data: {} })
 
-        provider.dispatch.setDialog({ visible: false })
+        provider.dispatch.setDialog({ data: {}, visible: false })
       }
+
       return () => (
-        <renderer.dialogForm.render
-          v-model={provider.dialog.value.visible}
+        <FYDialog
+          v-model={provider.dialog.visible}
           dialogConfig={unref(dialogConfig)}
-          formModel={provider.dialog.value.data}
+          formModel={provider.dialog.data}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
         />

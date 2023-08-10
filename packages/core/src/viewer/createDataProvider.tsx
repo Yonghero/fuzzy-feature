@@ -1,4 +1,5 @@
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
+import { watchDebounced } from '@vueuse/core'
 import { workInProgressFuzzy } from '../utils/expose'
 import { AppProviderKey } from '../types/types'
 import type { DataProvider, DialogProps } from '../types/provider'
@@ -29,7 +30,7 @@ export function createDataProvider(): DataProvider {
   const tableLoading = ref(true)
 
   // 对话框
-  const dialog = ref<DialogProps>({
+  const dialog = reactive<DialogProps>({
     visible: false,
     type: 'update',
     title: '编辑',
@@ -38,16 +39,22 @@ export function createDataProvider(): DataProvider {
 
   const dialogVisible = ref(false)
 
-  workInProgressFuzzy.dataProvider.value = computed(() => {
+  const watchValues = computed(() => {
     return {
       filterParams: filterParams.value,
       tableData: tableData.value,
       total: total.value,
-      tableLoading: tableLoading.value,
       currentPage: currentPage.value,
       pageSize: pageSize.value,
     }
   })
+
+  watchDebounced(watchValues,
+    (val) => {
+      workInProgressFuzzy.dataProvider.value = val
+    },
+    { debounce: 500, maxWait: 1000 },
+  )
 
   return {
     dispatch: {
@@ -64,7 +71,10 @@ export function createDataProvider(): DataProvider {
         tableLoading.value = loading
       },
       setDialog(props: Partial<DialogProps>) {
-        dialog.value = { ...dialog.value, ...props }
+        Object.keys(props).forEach((key) => {
+          dialog[key] = props[key]
+        })
+        // dialog = { ...dialog, ...props }
       },
       setCurrentPage(page) {
         currentPage.value = page

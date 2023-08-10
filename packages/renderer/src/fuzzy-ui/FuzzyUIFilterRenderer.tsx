@@ -42,7 +42,7 @@ export class FuzzyUIFilterRenderer implements FilterRenderer {
       return () => (
         <div class="h-[4rem] fuzzy-ui-filter-renderer w-full flex items-center gap-x-1 px-4">
           <FYInput
-            class="w-[15rem] h-[2.5rem]"
+            class="important-w-60 h-[2.5rem]"
             v-slots={inputSlots}
             filter-list={filterList.value}
             v-model={debounced.value}

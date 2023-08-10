@@ -37,15 +37,15 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
                   // 编辑前hook注入
                   if (handlers.updateBeforePop) {
                     const row = await handlers.updateBeforePop({ data: { ...scope.row } })
-                    provider.dialog.value.data = { row }
+                    provider.dialog.data = { ...row }
                   }
                   else {
-                    provider.dialog.value.data = { ...scope.row }
+                    provider.dialog.data = { ...scope.row }
                   }
-                  provider.dialog.value.type = 'update'
-                  provider.dialog.value.title = getAppProviderValue(AppProviderKey.Lang).update + options.title
+                  provider.dialog.type = 'update'
+                  provider.dialog.title = getAppProviderValue(AppProviderKey.Lang).update + options.title
                   nextTick(() => {
-                    provider.dialog.value.visible = true
+                    provider.dialog.visible = true
                   })
                 }}
               >
@@ -60,7 +60,7 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
                   type="danger"
                   link
                   onClick={() => {
-                    provider.dialog.value.data = { ...scope.row }
+                    provider.dialog.data = { ...scope.row }
                     visibleDeleteDialog.value = true
                   }}
                 >
@@ -87,10 +87,10 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
 
       // 确定删除
       async function handleDeleteConfirm() {
-        let data = { ...provider.dialog.value.data }
+        let data = { ...provider.dialog.data }
         // 删除前hook注入
         if (handlers.deleteBefore)
-          data = await handlers.deleteBefore({ data: { ...provider.dialog.value.data } })
+          data = await handlers.deleteBefore({ data: { ...provider.dialog.data } })
 
         const response = await httpProvider.delete(data)
         const lang = getAppProviderValue(AppProviderKey.Lang)
@@ -117,6 +117,15 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
         visibleDeleteDialog.value = false
       }
 
+      function handleSelection(v) {
+        handlers && handlers?.onSelection && handlers?.onSelection(v)
+      }
+
+      function handleHeaderSelection(v) {
+        handlers && handlers?.onHeaderSelection && handlers?.onHeaderSelection(v)
+      }
+      console.log('🚀 ~ file: createTable.tsx:139 ~ setup ~ renderer.tableHeader:', renderer.tableHeader)
+
       return () => (
         <>
           <renderer.table.render
@@ -125,6 +134,9 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
             index={options?.table?.index}
             data={unref(provider.tableData)}
             loading={unref(provider.tableLoading)}
+            onSelection={handleSelection}
+            onHeaderSelection={handleHeaderSelection}
+            renderer={renderer.tableHeader}
           />
           <renderer.dialogForm.render
             v-model={visibleDeleteDialog.value}

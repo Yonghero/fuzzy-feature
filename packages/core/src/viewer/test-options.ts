@@ -1,8 +1,9 @@
+import type { Handlers } from '../types/handlers'
 import type { OptionsConfiguration } from '../types/options'
 import { mergeFuzzyOptions } from '../utils/merge'
 
 export const testOptions: OptionsConfiguration = {
-  title: 'Tab1',
+  title: 'tab1',
   api: '/get/api',
   table: {
 
@@ -18,6 +19,9 @@ export const testOptions: OptionsConfiguration = {
       value: 'name',
       type: 'input',
       require: true,
+      rules: [{
+        min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur',
+      }],
       visible: {
         table: true,
         filter: false,
@@ -154,3 +158,47 @@ export const testOptions2: OptionsConfiguration = {
 }
 
 export const mergeOptions = mergeFuzzyOptions(testOptions, testOptions2)
+
+export const handlers1: Handlers = {
+  async queryBefore({ data }) {
+    console.log('queryBefore')
+    return data
+  },
+  async updateBeforePop({ data }) {
+    console.log('updateBeforePop')
+    return data
+  },
+  async updateConfirm({ data }) {
+    console.log('updateConfirm')
+
+    return data
+  },
+  async createConfirm({ data }) {
+    console.log('updateConfirm')
+    return data
+  },
+  tabChange() {
+    console.log('tabChange')
+  },
+  async deleteBefore({ data }) {
+    console.log('deleteBefore')
+    return data
+  },
+  createCancel() {
+    console.log('createCancel')
+  },
+  updateCancel() {
+    console.log('updateCancel')
+  },
+  updated() {
+    console.log('updated')
+  },
+  onSelection(v) {
+    console.log('onSelection', v)
+  },
+  onHeaderSelection(v) {
+    console.log('onHeaderSelection', v)
+  },
+}
+
+export const mergeHandlers = mergeFuzzyOptions(handlers1, handlers1)

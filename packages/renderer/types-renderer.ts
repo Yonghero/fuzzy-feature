@@ -48,6 +48,11 @@ export interface DialogFormRenderer {
 export interface MessageRenderer {
   render: any
 }
+
+export interface TableHeader {
+  header: any
+}
+
 /**
  * 渲染器
  */
@@ -59,6 +64,7 @@ export interface Renderer {
   pagination: PaginationRenderer
   dialogForm: DialogFormRenderer
   message: MessageRenderer
+  tableHeader: TableHeader
 }
 
 /**

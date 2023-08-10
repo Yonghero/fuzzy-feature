@@ -13,7 +13,7 @@ export function createMenu(Menu: MenuRenderer, refProps) {
         // 多项options
         if (Array.isArray(props.options)) {
           return props.options.map((item, idx) => ({
-            label: item.title,
+            label: unref(item.title),
             value: idx,
           }))
         }

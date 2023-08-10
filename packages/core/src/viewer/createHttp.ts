@@ -2,6 +2,7 @@ import { unref } from 'vue'
 import type { HttpAdapters } from 'packages/http'
 import type { Api } from '../types/options'
 import type { DataProvider } from '../types/provider'
+import { workInProgressFuzzy } from '../utils/expose'
 
 export function createHttp(options, handlers, http: HttpAdapters, dataProvider: DataProvider) {
   function getApi(mode: keyof Api) {
@@ -63,6 +64,12 @@ export function createHttp(options, handlers, http: HttpAdapters, dataProvider: 
   async function deleteHttp(reqParams) {
     return http.delete(getApi('delete'), reqParams)
   }
+
+  // 暴露get请求
+  workInProgressFuzzy.shallowUpdate = get
+
+  // 暴露删除请求
+  workInProgressFuzzy.shallowDelete = deleteHttp
 
   return {
     get,

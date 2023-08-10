@@ -9,7 +9,7 @@ importers:
       '@antfu/utils': ^0.7.5
       '@babel/core': ^7.22.9
       '@babel/preset-env': ^7.22.9
-      '@hitotek/fuzzy-ui': ^1.0.8
+      '@hitotek/fuzzy-ui': ^1.0.8-beta.0
       '@types/node': ^20.4.5
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
@@ -30,14 +30,13 @@ importers:
       vite: ^4.4.7
       vue: ^3.3.4
     dependencies:
-      '@vueuse/core': 10.3.0_vue@3.3.4
+      '@hitotek/fuzzy-ui': 1.0.8-beta.0
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
       '@antfu/ni': 0.21.5
       '@antfu/utils': 0.7.5
       '@babel/core': 7.22.9
       '@babel/preset-env': 7.22.9_@babel+core@7.22.9
-      '@hitotek/fuzzy-ui': 1.0.8
       '@types/node': 20.4.5
       '@vitejs/plugin-vue': 4.2.3_vite@4.4.7+vue@3.3.4
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.4.7+vue@3.3.4
@@ -45,6 +44,7 @@ importers:
       '@vue/babel-plugin-jsx': 1.1.5_@babel+core@7.22.9
       '@vue/babel-preset-jsx': 1.4.0_@babel+core@7.22.9+vue@3.3.4
       '@vue/compiler-sfc': 3.3.4
+      '@vueuse/core': 10.3.0_vue@3.3.4
       bumpp: 9.1.1
       element-plus: 2.3.9_vue@3.3.4
       eslint: 8.45.0
@@ -72,7 +72,7 @@ importers:
   playground:
     specifiers:
       '@antfu/eslint-config': ^0.39.8
-      '@hitotek/fuzzy-ui': ^1.0.8
+      '@hitotek/fuzzy-ui': ^1.0.8-beta.0
       '@iconify-json/carbon': ^1.1.18
       '@types/node': ^20.4.5
       '@unocss/eslint-config': ^0.53.6
@@ -99,12 +99,12 @@ importers:
       vue-router: ^4.2.4
       vue-tsc: ^1.8.8
     dependencies:
+      '@hitotek/fuzzy-ui': 1.0.8-beta.0
       '@vueuse/core': 10.2.1_vue@3.3.4
       vue: 3.3.4
       vue-router: 4.2.4_vue@3.3.4
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
-      '@hitotek/fuzzy-ui': 1.0.8
       '@iconify-json/carbon': 1.1.18
       '@types/node': 20.4.5
       '@unocss/eslint-config': 0.53.6_eslint@8.45.0+typescript@5.1.6
@@ -1709,11 +1709,11 @@ packages:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: true
 
-  /@hitotek/fuzzy-ui/1.0.8:
-    resolution: {integrity: sha512-Rp19VZyjtPx1JrdLcED6OwNJ+UPVNnoLzWlQyGql5cxSWDwdUeHPUE4J0WNbAu8JuBRvmLYwq8Her/1IESaEbg==}
+  /@hitotek/fuzzy-ui/1.0.8-beta.0:
+    resolution: {integrity: sha512-0s+rvYbG3ohqdDUH1BH2OBwt1tZKGof93Wi9H3xD3LlcrzCfYq6xprFBYk0gTi9D8HDgUvy6yZkCx/mPJ5iptA==}
     dependencies:
       sortablejs: 1.15.0
-    dev: true
+    dev: false
 
   /@humanwhocodes/config-array/0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
@@ -2084,7 +2084,6 @@ packages:
 
   /@types/web-bluetooth/0.0.17:
     resolution: {integrity: sha512-4p9vcSmxAayx72yn70joFoL44c9MO/0+iVEBIQXe3v2h2SiAsEIo/G5v6ObFWvNKRFjbrVadNf9LqEEZeQPzdA==}
-    dev: false
 
   /@typescript-eslint/eslint-plugin/6.2.0_b6e6195668c202d42fb5cd2318c53fd3:
     resolution: {integrity: sha512-rClGrMuyS/3j0ETa1Ui7s6GkLhfZGKZL3ZrChLeAiACBE/tRc1wq8SNZESUuluxhLj9FkUefRs2l6bCIArWBiQ==}
@@ -3267,7 +3266,7 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: false
+    dev: true
 
   /@vueuse/core/9.13.0_vue@3.3.4:
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
@@ -3287,7 +3286,7 @@ packages:
 
   /@vueuse/metadata/10.3.0:
     resolution: {integrity: sha512-Ema3YhNOa4swDsV0V7CEY5JXvK19JI/o1szFO1iWxdFg3vhdFtCtSTP26PCvbUpnUtNHBY2wx5y3WDXND5Pvnw==}
-    dev: false
+    dev: true
 
   /@vueuse/metadata/9.13.0:
     resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
@@ -3309,7 +3308,7 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: false
+    dev: true
 
   /@vueuse/shared/9.13.0_vue@3.3.4:
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
@@ -6942,7 +6941,7 @@ packages:
 
   /sortablejs/1.15.0:
     resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==}
-    dev: true
+    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}

@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, UnwrapNestedRefs } from 'vue'
 import type { Response } from 'packages/http'
 
 export interface ValueOfProvide {
@@ -7,7 +7,7 @@ export interface ValueOfProvide {
   currentPage: Ref<number>
   total: Ref<number>
   tableLoading: Ref<boolean>
-  dialog: Ref<DialogProps>
+  dialog: UnwrapNestedRefs<DialogProps>
   dialogVisible: Ref<boolean>
   pageSize: Ref<number>
 }
@@ -38,7 +38,7 @@ export interface WorkInData {
   tableData: any[]
   currentPage: number
   total: number
-  tableLoading: boolean
+  // tableLoading: boolean
 }
 
 export interface HttpProvider {

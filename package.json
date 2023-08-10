@@ -45,7 +45,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerdependencies": {
-    "@hitotek/fuzzy-ui": "^1.0.8",
+    "@hitotek/fuzzy-ui": "^1.0.8-beta.0",
     "element-plus": "^2.3.9",
     "vue": "^3.2.26"
   },
@@ -55,7 +55,6 @@
     "@antfu/utils": "^0.7.5",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
-    "@hitotek/fuzzy-ui": "^1.0.8",
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

@@ -5,11 +5,11 @@ import { getAppProviderValue } from './provider'
 
 export function createExtra(renderer, options, extraRenderer, provider: DataProvider) {
   function onCreate() {
-    provider.dialog.value.data = { }
-    provider.dialog.value.type = 'create'
-    provider.dialog.value.title = getAppProviderValue(AppProviderKey.Lang).create + options.title
+    provider.dialog.data = { }
+    provider.dialog.type = 'create'
+    provider.dialog.title = getAppProviderValue(AppProviderKey.Lang).create + options.title
     nextTick(() => {
-      provider.dialog.value.visible = true
+      provider.dialog.visible = true
     })
   }
 

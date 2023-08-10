@@ -3,19 +3,19 @@
   "packageManager": "pnpm@8.6.0",
   "scripts": {
     "build": "vite build",
-    "dev": "vite --port 3333 --open",
+    "dev": "vite --port 3333 --open --force",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hitotek/fuzzy-ui": "^1.0.8-beta.0",
     "@vueuse/core": "^10.2.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
-    "@hitotek/fuzzy-ui": "^1.0.8",
     "@iconify-json/carbon": "^1.1.18",
     "@types/node": "^20.4.5",
     "@unocss/eslint-config": "^0.53.6",

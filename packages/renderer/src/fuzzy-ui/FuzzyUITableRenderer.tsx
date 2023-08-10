@@ -1,5 +1,5 @@
 import type { Templates } from 'packages/core/src/types/options'
-import type { TableRenderer } from 'packages/renderer/types-renderer'
+import type { TableHeader, TableRenderer } from 'packages/renderer/types-renderer'
 import type { PropType, Ref } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { FYTable } from '@hitotek/fuzzy-ui'
@@ -27,8 +27,12 @@ export class FuzzyUITableRenderer implements TableRenderer {
         type: Object as PropType<Ref<boolean>>,
         default: ref(false),
       },
+      renderer: {
+        type: Object as PropType<TableHeader>,
+      },
     },
-    setup(props) {
+    emits: ['selection', 'headerSelection'],
+    setup(props, { emit }) {
       return () => (
         <div class="h-full fuzzy-ui-table-renderer w-full">
           <FYTable
@@ -39,6 +43,9 @@ export class FuzzyUITableRenderer implements TableRenderer {
             column-selection={props.selection}
             column-index={props.index}
             v-loading={unref(props.loading)}
+            onSelection={v => emit('selection', v)}
+            onHeaderSelection={v => emit('headerSelection', v)}
+            renderer={props.renderer}
           />
         </div>
       )

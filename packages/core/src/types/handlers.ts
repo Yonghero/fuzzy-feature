@@ -23,7 +23,6 @@ export interface Handlers {
   updateBeforePop?: (params: HandlerParams) => Promise<any> //
   /**
    * 删除前
-   * @Returns 如果传递了url和params 删除会调用传递的url和params作为body参数 如果没传url系统默认设置url 返回值直接当作删除接口的body参数
    */
   deleteBefore?: (params: HandlerParams) => Promise<any>
   /**
@@ -48,7 +47,13 @@ export interface Handlers {
    * 该事件可以接收多选的参数
    * @param params
    */
-  selectionChange?: (params: any[]) => any
+  onSelection?: (params: any[]) => any
+  /**
+   * 表格设置点击
+   * @param params
+   * @returns
+   */
+  onHeaderSelection?: (params) => any
   /**
    * 更新成功后
    */

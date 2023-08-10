@@ -9,6 +9,10 @@ export interface LayoutRenderer {
   extra: DefineComponent
 }
 
+export interface LayoutSlots {
+  tree: () => JSX.Element
+}
+
 export interface LayoutProviderProps {
   renderer: LayoutRenderer
 }

@@ -7,7 +7,8 @@ import { FuzzyUIPaginationRenderer } from './FuzzyUIPaginationRenderer'
 import { FuzzyUIMenuRenderer } from './FuzzyUIMenuRenderer'
 import { FuzzyUIMessageRenderer } from './FuzzyUIMessageRenderer'
 
-import 'uno.css'
+import 'virtual:uno.css'
+import { FuzzyUITableHeaderRenderer } from './FuzzyUITableHeaderRenderer'
 
 export class FuzzyUIRenderer implements Renderer {
   filter = new FuzzyUIFilterRenderer()
@@ -17,4 +18,5 @@ export class FuzzyUIRenderer implements Renderer {
   menu = new FuzzyUIMenuRenderer()
   pagination = new FuzzyUIPaginationRenderer()
   message = new FuzzyUIMessageRenderer()
+  tableHeader = new FuzzyUITableHeaderRenderer()
 }
