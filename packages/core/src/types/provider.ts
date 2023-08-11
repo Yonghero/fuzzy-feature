@@ -1,5 +1,5 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import type { Response } from 'packages/http'
+import type { Response } from 'packages/core/http/types-http'
 
 export interface ValueOfProvide {
   filterParams: Ref<Record<string, any>>

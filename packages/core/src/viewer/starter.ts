@@ -1,6 +1,6 @@
 import { unref } from 'vue'
 import type { Renderer } from 'packages/renderer/types-renderer'
-import type { HttpAdapters } from 'packages/http'
+import type { HttpAdapters } from 'packages/core/http/types-http'
 import type { OptionsConfiguration } from '../types/options'
 import { createFilter } from './createFilter'
 import { createTable } from './createTable'

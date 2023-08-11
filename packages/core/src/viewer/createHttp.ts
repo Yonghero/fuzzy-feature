@@ -1,5 +1,5 @@
 import { unref } from 'vue'
-import type { HttpAdapters } from 'packages/http'
+import type { HttpAdapters } from 'packages/core/http/types-http'
 import type { Api } from '../types/options'
 import type { DataProvider } from '../types/provider'
 import { workInProgressFuzzy } from '../utils/expose'

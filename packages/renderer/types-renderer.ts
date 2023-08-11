@@ -1,6 +1,6 @@
 import type { Component, DefineComponent, VNode } from 'vue'
 import type { Templates } from 'packages/core/src/types/options'
-import type { HttpAdapters } from '../http'
+import type { HttpAdapters } from '../core/http/types-http'
 import type { LayoutProvider } from './../layout-provider/types'
 
 /**

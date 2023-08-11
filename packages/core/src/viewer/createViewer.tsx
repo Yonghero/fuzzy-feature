@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
 import type { Adapters, ExtraRenderer, Renderer } from 'packages/renderer'
-import type { HttpAdapters } from 'packages/http'
+import type { HttpAdapters } from 'packages/core/http/types-http'
 import type { LayoutProvider } from 'packages/layout-provider'
 import type { OptionsConfiguration } from '../types/options'
 import type { Handlers } from '../types/handlers'
