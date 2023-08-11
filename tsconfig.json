@@ -17,10 +17,13 @@
     "emitDeclarationOnly": true,
     "declaration": true,
     "skipLibCheck": true,
-    "outDir": "dist/types",
+    "declarationDir": "dist",
     "paths": {
       "packages/*": ["./packages/*"]
     }
   },
-  "include": ["packages/**/*"]
+  "include": ["packages/**/*"],
+  "exclude": [
+    "node_modules"
+  ]
 }

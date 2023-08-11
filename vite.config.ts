@@ -19,7 +19,7 @@ export default defineConfig({
 
   build: {
     lib: {
-      entry: path.resolve(__dirname, './packages/core/index.ts'),
+      entry: path.resolve(__dirname, './packages/index.ts'),
       name: 'fuzzy-feature',
       fileName: format => `fuzzy-feature.${format}.js`,
     },
