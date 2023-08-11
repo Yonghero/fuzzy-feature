@@ -20,14 +20,11 @@
       "require": "./dist/fuzzy-feature.umd.js",
       "import": "./dist/fuzzy-feature.es.js"
     },
-    "./style": {
-      "import:": "./dist/style.css",
-      "require:": "./dist/style.css"
-    }
+    "./style.css": "./dist/style.css"
   },
   "main": "./dist/fuzzy-feature.es.js",
   "module": "./dist/fuzzy-feature.es.js",
-  "types": "./dist/types",
+  "types": "./dist/types/core/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
