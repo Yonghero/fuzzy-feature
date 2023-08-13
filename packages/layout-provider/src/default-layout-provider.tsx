@@ -28,7 +28,7 @@ export const DefaultLayoutProvider = defineComponent({
             <props.renderer.table/>
           </div>
         </div>
-        <div class="w-full b-t b-[rgba(220, 223, 230, 1)]">
+        <div class="w-full">
           <div class="px-5">
             <props.renderer.pagination class="w-full flex justify-end h-[51px] "/>
           </div>
