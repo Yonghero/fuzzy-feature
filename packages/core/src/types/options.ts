@@ -24,6 +24,22 @@ export interface BaseTemplate {
    *  后端需要的字段值
    */
   value: string
+  /**
+   * 数据默认值
+   */
+  defaultValue?: {
+    filter?: any
+    update?: any
+    create?: any
+  }
+  /**
+   * 单元格内容过长, 多余的内容会在 hover 时以 tooltip 的形式显示出来
+   */
+  'show-overflow-tooltip'?: boolean
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean
   type: string
   /**
    * 是否在增删改查中包含此字段
