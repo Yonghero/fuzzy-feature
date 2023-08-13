@@ -1,8 +1,8 @@
 import type { Handlers } from '../types/handlers'
-import type { OptionsConfiguration } from '../types/options'
+import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
 
-export const testOptions: OptionsConfiguration = {
+export const testOptions = defineConfig({
   title: 'tab1',
   api: '/get/api',
   table: {
@@ -82,9 +82,9 @@ export const testOptions: OptionsConfiguration = {
       },
     },
   ],
-}
+})
 
-export const testOptions2: OptionsConfiguration = {
+export const testOptions2 = defineConfig({
   title: 'Tab2',
   api: '/get/api/2',
   table: {
@@ -155,7 +155,7 @@ export const testOptions2: OptionsConfiguration = {
       },
     },
   ],
-}
+})
 
 export const mergeOptions = mergeFuzzyOptions(testOptions, testOptions2)
 

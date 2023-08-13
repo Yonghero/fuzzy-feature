@@ -4,6 +4,7 @@ export {
   $shallowUpdate,
   $insideReactiveValue,
   mergeFuzzyOptions,
+  defineConfig,
 } from './src'
 
 export { FuzzyUIRenderer } from '../renderer/index'

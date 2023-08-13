@@ -5,6 +5,7 @@ export {
   $insideReactiveValue,
   mergeFuzzyOptions,
   HttpImp,
+  defineConfig,
 } from './core'
 
 export { FuzzyUIRenderer } from './renderer/index'

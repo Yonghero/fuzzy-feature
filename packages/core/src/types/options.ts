@@ -32,6 +32,8 @@ export interface BaseTemplate {
     update?: any
     create?: any
   }
+  options?: { label: string; value: any }[]
+  onChange?: (params?) => void
   /**
    * 单元格内容过长, 多余的内容会在 hover 时以 tooltip 的形式显示出来
    */
@@ -40,7 +42,7 @@ export interface BaseTemplate {
    * 是否禁用
    */
   disabled?: boolean
-  type: string
+  type?: string
   /**
    * 是否在增删改查中包含此字段
    */

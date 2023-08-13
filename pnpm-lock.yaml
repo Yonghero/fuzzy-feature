@@ -9,7 +9,6 @@ importers:
       '@antfu/utils': ^0.7.5
       '@babel/core': ^7.22.9
       '@babel/preset-env': ^7.22.9
-      '@hitotek/fuzzy-ui': ^1.0.8-beta.0
       '@types/node': ^20.4.5
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
@@ -29,8 +28,6 @@ importers:
       typescript: ^5.1.6
       vite: ^4.4.7
       vue: ^3.3.4
-    dependencies:
-      '@hitotek/fuzzy-ui': 1.0.8-beta.0
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
       '@antfu/ni': 0.21.5
