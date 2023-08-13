@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
+import type { Component, ComputedRef, Ref, VNode } from 'vue'
 
 export interface Api {
   create: string | ComputedRef<string> | Ref<string>
@@ -13,7 +13,7 @@ export interface Feature {
   delete?: boolean
 }
 
-export type Templates = any
+export type Templates = BaseTemplate
 
 export interface BaseTemplate {
   /**
@@ -27,7 +27,6 @@ export interface BaseTemplate {
   type: string
   /**
    * 是否在增删改查中包含此字段
-   *
    */
   visible?: {
     filter?: boolean | ((row: any) => boolean)
@@ -36,6 +35,23 @@ export interface BaseTemplate {
     update?: boolean | ((row: any) => boolean)
     delete?: boolean | ((row: any) => boolean)
   }
+  /**
+   * 替换以下类型的组件实现
+   */
+  renderer?: {
+    filter?: (props) => Component | Element | VNode
+    table?: (props) => Component | Element | VNode
+    update?: (props) => Component | Element | VNode
+    create?: (props) => Component | Element | VNode
+  }
+  /**
+   *  该字段的表单规则 参照element-plus
+   */
+  rules?: any[]
+  /**
+     * 是否必填
+     */
+  require?: boolean
 }
 
 export interface OptionsConfiguration {
