@@ -22,7 +22,7 @@
       "packages/*": ["./packages/*"]
     }
   },
-  "include": ["packages/index.ts"],
+  "include": ["./packages/index.ts"],
   "exclude": [
     "node_modules"
   ]
