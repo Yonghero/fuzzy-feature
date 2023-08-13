@@ -40,7 +40,8 @@
     "build": "rimraf lib && vite build && tsc -p ./tsconfig.json",
     "lint": "eslint .",
     "release": "bumpp && npm publish",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "playground": "cd ./playground && nr dev"
   },
   "peerdependencies": {
     "@hitotek/fuzzy-ui": "^1.0.8-beta.0",
