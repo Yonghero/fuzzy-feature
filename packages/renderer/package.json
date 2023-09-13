@@ -16,5 +16,8 @@
   "files": [
     "dist",
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "@hitotek/fuzzy-ui": "^1.0.11"
+  }
 }

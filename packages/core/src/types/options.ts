@@ -62,6 +62,7 @@ export interface BaseTemplate {
     update?: (props) => Component | Element | VNode
     create?: (props) => Component | Element | VNode
   }
+  render?: (props) => Component | Element | VNode
   /**
    *  该字段的表单规则 参照element-plus
    */
@@ -73,6 +74,7 @@ export interface BaseTemplate {
 }
 
 export interface OptionsConfiguration {
+  id?: string
   title: string | Ref<string>
   api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string> | any
   /**

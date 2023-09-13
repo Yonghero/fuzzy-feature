@@ -1,5 +1,6 @@
 import type { MenuRenderer } from 'packages/renderer/types-renderer'
-import { computed, defineComponent, ref, unref } from 'vue'
+import { computed, defineComponent, ref, unref, watchEffect } from 'vue'
+import { workInProgressFuzzy } from '../utils/expose'
 
 export function createMenu(Menu: MenuRenderer, refProps) {
   const activeTabIdx = ref(0)
@@ -7,6 +8,13 @@ export function createMenu(Menu: MenuRenderer, refProps) {
   const menu = defineComponent({
 
     setup() {
+      watchEffect(() => {
+        const props = unref(refProps)
+        if (!props || !props.options)
+          return
+
+        workInProgressFuzzy.options.value = Array.isArray(props.options) ? props.options[activeTabIdx.value] : props.options
+      })
       // 菜单项
       const menuTmpl = computed(() => {
         const props = unref(refProps)
@@ -55,10 +63,14 @@ export function createMenu(Menu: MenuRenderer, refProps) {
         if (Array.isArray(props.handlers)) {
           if (props.handlers[activeTabIdx.value].tabChange)
             props.handlers[activeTabIdx.value].tabChange()
+          // workInOptions.value = props.options[activeTabIdx.value]
+          workInProgressFuzzy.options.value = props.options[activeTabIdx.value]
         }
         else {
           if (props.handlers.tabChange)
             props.handlers.tabChange()
+          // workInOptions.value = props.options
+          workInProgressFuzzy.options.value = props.options
         }
         activeTabIdx.value = key
       }

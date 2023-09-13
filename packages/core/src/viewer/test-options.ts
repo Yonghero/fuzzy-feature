@@ -3,6 +3,7 @@ import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
 
 export const testOptions = defineConfig({
+  id: 'vcenter_2_1_1',
   title: 'tab1',
   api: '/get/api',
   table: {
@@ -85,6 +86,7 @@ export const testOptions = defineConfig({
 })
 
 export const testOptions2 = defineConfig({
+  id: 'vcenter_2_1_2',
   title: 'Tab2',
   api: '/get/api/2',
   table: {

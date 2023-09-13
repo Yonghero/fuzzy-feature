@@ -79,5 +79,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "@hitotek/fuzzy-ui": "^1.0.11"
   }
 }

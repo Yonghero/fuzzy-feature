@@ -124,7 +124,6 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       function handleHeaderSelection(v) {
         handlers && handlers?.onHeaderSelection && handlers?.onHeaderSelection(v)
       }
-      console.log('🚀 ~ file: createTable.tsx:139 ~ setup ~ renderer.tableHeader:', renderer.tableHeader)
 
       return () => (
         <>

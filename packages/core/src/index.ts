@@ -1,6 +1,6 @@
 export * from './setup'
 export * from './types/types'
 export * from './viewer'
-export { $insideReactiveValue, $shallowUpdate, $shallowDelete } from './utils/expose'
+export { $insideReactiveValue, $shallowUpdate, $shallowDelete, $workInFuzzyOptions } from './utils/expose'
 export { mergeFuzzyOptions } from './utils/merge'
 export { defineConfig } from './utils/defineConfig'

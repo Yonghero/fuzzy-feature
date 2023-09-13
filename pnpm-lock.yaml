@@ -9,6 +9,7 @@ importers:
       '@antfu/utils': ^0.7.5
       '@babel/core': ^7.22.9
       '@babel/preset-env': ^7.22.9
+      '@hitotek/fuzzy-ui': ^1.0.11
       '@types/node': ^20.4.5
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
@@ -28,6 +29,8 @@ importers:
       typescript: ^5.1.6
       vite: ^4.4.7
       vue: ^3.3.4
+    dependencies:
+      '@hitotek/fuzzy-ui': 1.0.11
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
       '@antfu/ni': 0.21.5
@@ -57,14 +60,17 @@ importers:
   packages/core:
     specifiers: {}
 
-  packages/http:
+  packages/core/http:
     specifiers: {}
 
   packages/layout-provider:
     specifiers: {}
 
   packages/renderer:
-    specifiers: {}
+    specifiers:
+      '@hitotek/fuzzy-ui': ^1.0.11
+    dependencies:
+      '@hitotek/fuzzy-ui': 1.0.11
 
   playground:
     specifiers:
@@ -1705,6 +1711,12 @@ packages:
   /@floating-ui/utils/0.1.1:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: true
+
+  /@hitotek/fuzzy-ui/1.0.11:
+    resolution: {integrity: sha512-2HCWRr8LQAdE2mH5tImcl4KKh0WIWOOCR/HvcuPKBb9FbuzW3jcHRlTRg4fvowtBRH8V7STZR8j+0ipFA4noBw==}
+    dependencies:
+      sortablejs: 1.15.0
+    dev: false
 
   /@hitotek/fuzzy-ui/1.0.8-beta.0:
     resolution: {integrity: sha512-0s+rvYbG3ohqdDUH1BH2OBwt1tZKGof93Wi9H3xD3LlcrzCfYq6xprFBYk0gTi9D8HDgUvy6yZkCx/mPJ5iptA==}

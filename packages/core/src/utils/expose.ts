@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import type { WorkInData } from '../types/provider'
+import type { OptionsConfiguration } from './../types/options'
 
 /**
  * 该文件暴露调用内部数据和方法, 可以在外部调用更加灵活处理
@@ -9,6 +10,7 @@ export const workInProgressFuzzy = {
   shallowUpdate: p => p,
   shallowDelete: p => p,
   dataProvider: ref<WorkInData>(),
+  options: ref<OptionsConfiguration>(),
 }
 
 /**
@@ -31,6 +33,10 @@ export async function $shallowDelete(params) {
 
 export function $insideReactiveValue() {
   return workInProgressFuzzy.dataProvider
+}
+
+export function $workInFuzzyOptions() {
+  return workInProgressFuzzy.options
 }
 
 /**

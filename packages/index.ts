@@ -5,6 +5,7 @@ export {
   $insideReactiveValue,
   mergeFuzzyOptions,
   HttpImp,
+  $workInFuzzyOptions,
   defineConfig,
 } from './core'
 
