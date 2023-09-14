@@ -48,8 +48,6 @@ export function createHttp(options, handlers, http: HttpAdapters, dataProvider: 
     // 关闭表格loading...
     dataProvider.dispatch.setTableLoading(false)
 
-    // console.log('🚀 ~ file: createHttp.ts:28 ~ getHttp ~ response:', response)
-
     return response
   }
 

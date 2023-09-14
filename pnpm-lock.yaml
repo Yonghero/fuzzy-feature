@@ -9,7 +9,7 @@ importers:
       '@antfu/utils': ^0.7.5
       '@babel/core': ^7.22.9
       '@babel/preset-env': ^7.22.9
-      '@hitotek/fuzzy-ui': ^1.0.11
+      '@hitotek/fuzzy-ui': 1.0.12
       '@types/node': ^20.4.5
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
@@ -29,14 +29,13 @@ importers:
       typescript: ^5.1.6
       vite: ^4.4.7
       vue: ^3.3.4
-    dependencies:
-      '@hitotek/fuzzy-ui': 1.0.11
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
       '@antfu/ni': 0.21.5
       '@antfu/utils': 0.7.5
       '@babel/core': 7.22.9
       '@babel/preset-env': 7.22.9_@babel+core@7.22.9
+      '@hitotek/fuzzy-ui': 1.0.12
       '@types/node': 20.4.5
       '@vitejs/plugin-vue': 4.2.3_vite@4.4.7+vue@3.3.4
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.4.7+vue@3.3.4
@@ -68,14 +67,14 @@ importers:
 
   packages/renderer:
     specifiers:
-      '@hitotek/fuzzy-ui': ^1.0.11
-    dependencies:
-      '@hitotek/fuzzy-ui': 1.0.11
+      '@hitotek/fuzzy-ui': ^1.0.12
+    devDependencies:
+      '@hitotek/fuzzy-ui': 1.0.12
 
   playground:
     specifiers:
       '@antfu/eslint-config': ^0.39.8
-      '@hitotek/fuzzy-ui': ^1.0.8-beta.0
+      '@hitotek/fuzzy-ui': ^1.0.12
       '@iconify-json/carbon': ^1.1.18
       '@types/node': ^20.4.5
       '@unocss/eslint-config': ^0.53.6
@@ -83,6 +82,9 @@ importers:
       '@vitejs/plugin-vue': ^4.2.3
       '@vitejs/plugin-vue-jsx': ^3.0.1
       '@vue-macros/volar': ^0.10.2
+      '@vue-office/docx': ^1.3.0
+      '@vue-office/excel': ^1.4.5
+      '@vue-office/pdf': ^1.5.3
       '@vue/test-utils': ^2.4.1
       '@vueuse/core': ^10.2.1
       eslint: ^8.45.0
@@ -102,12 +104,12 @@ importers:
       vue-router: ^4.2.4
       vue-tsc: ^1.8.8
     dependencies:
-      '@hitotek/fuzzy-ui': 1.0.8-beta.0
       '@vueuse/core': 10.2.1_vue@3.3.4
       vue: 3.3.4
       vue-router: 4.2.4_vue@3.3.4
     devDependencies:
       '@antfu/eslint-config': 0.39.8_eslint@8.45.0+typescript@5.1.6
+      '@hitotek/fuzzy-ui': 1.0.12
       '@iconify-json/carbon': 1.1.18
       '@types/node': 20.4.5
       '@unocss/eslint-config': 0.53.6_eslint@8.45.0+typescript@5.1.6
@@ -115,6 +117,9 @@ importers:
       '@vitejs/plugin-vue': 4.2.3_vite@4.4.7+vue@3.3.4
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.4.7+vue@3.3.4
       '@vue-macros/volar': 0.10.2_vue-tsc@1.8.8+vue@3.3.4
+      '@vue-office/docx': 1.3.0_vue@3.3.4
+      '@vue-office/excel': 1.4.5_vue@3.3.4
+      '@vue-office/pdf': 1.5.3_vue@3.3.4
       '@vue/test-utils': 2.4.1_vue@3.3.4
       eslint: 8.45.0
       jsdom: 22.1.0
@@ -361,7 +366,7 @@ packages:
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4
       lodash.debounce: 4.0.8
-      resolve: 1.22.2
+      resolve: 1.22.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1712,17 +1717,11 @@ packages:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: true
 
-  /@hitotek/fuzzy-ui/1.0.11:
-    resolution: {integrity: sha512-2HCWRr8LQAdE2mH5tImcl4KKh0WIWOOCR/HvcuPKBb9FbuzW3jcHRlTRg4fvowtBRH8V7STZR8j+0ipFA4noBw==}
+  /@hitotek/fuzzy-ui/1.0.12:
+    resolution: {integrity: sha512-38eXI/D8lYtrIw4Jw7DVXWqpLCpgib0bxMnt1hQFl5GDndsNO7my3uL+DOO5P9cWFGrObuIIiYunnjpQO256Uw==}
     dependencies:
       sortablejs: 1.15.0
-    dev: false
-
-  /@hitotek/fuzzy-ui/1.0.8-beta.0:
-    resolution: {integrity: sha512-0s+rvYbG3ohqdDUH1BH2OBwt1tZKGof93Wi9H3xD3LlcrzCfYq6xprFBYk0gTi9D8HDgUvy6yZkCx/mPJ5iptA==}
-    dependencies:
-      sortablejs: 1.15.0
-    dev: false
+    dev: true
 
   /@humanwhocodes/config-array/0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
@@ -3009,6 +3008,48 @@ packages:
       - '@vue-macros/reactivity-transform'
       - rollup
       - vue
+    dev: true
+
+  /@vue-office/docx/1.3.0_vue@3.3.4:
+    resolution: {integrity: sha512-36qoKwE4VKkmGClBLg3Uxsb0ORVlFMKz2bg2TpNZlVA06Ui1fBCCyTqTywfHqWLujTAN/rGZrnFmICz9weWXgA==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.7.1
+      vue: ^2.0.0 || >=3.0.0
+      vue-demi: ^0.13.11
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.4
+    dev: true
+
+  /@vue-office/excel/1.4.5_vue@3.3.4:
+    resolution: {integrity: sha512-tLX5mYaJdDAA/ZHqrZDZ9UB+P44AF82UA30DUEnpgMXonz+E4PjohGWowgccagqzULc/hKuijt4VWPkJ9ZTmEA==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.7.1
+      vue: ^2.0.0 || >=3.0.0
+      vue-demi: ^0.13.11
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.4
+    dev: true
+
+  /@vue-office/pdf/1.5.3_vue@3.3.4:
+    resolution: {integrity: sha512-jNoKWkema5MAF8X6iw51FVrJZQx2FJ1cRUm0FAUIUeHOy6B7SFgNOLeRgNM1s8XmvWug3/EqqffO6C4YOWAWjQ==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.7.1
+      vue: ^2.0.0 || >=3.0.0
+      vue-demi: ^0.13.11
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.4
     dev: true
 
   /@vue/babel-helper-vue-jsx-merge-props/1.4.0:
@@ -6695,7 +6736,7 @@ packages:
     resolution: {integrity: sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==}
     hasBin: true
     dependencies:
-      is-core-module: 2.12.1
+      is-core-module: 2.13.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
@@ -6950,7 +6991,7 @@ packages:
 
   /sortablejs/1.15.0:
     resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==}
-    dev: false
+    dev: true
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
