@@ -22,6 +22,7 @@
       "packages/*": ["./packages/*"]
     },
   },
+  "types": ["@hitotek/fuzzy-ui"],
   "include": ["packages"],
   "exclude": [
     "node_modules"
