@@ -44,7 +44,7 @@
     "playground": "cd ./playground && nr dev"
   },
   "peerdependencies": {
-    "@hitotek/fuzzy-ui": "latest",
+    "@hitotek/fuzzy-ui": "1.0.12",
     "element-plus": "^2.3.9",
     "vue": "^3.2.26"
   },

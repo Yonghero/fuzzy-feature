@@ -20,9 +20,9 @@
     "declarationDir": "dist",
     "paths": {
       "packages/*": ["./packages/*"]
-    }
+    },
   },
-  "include": ["./packages/index.ts"],
+  "include": ["packages"],
   "exclude": [
     "node_modules"
   ]
