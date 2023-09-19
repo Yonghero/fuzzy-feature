@@ -68,9 +68,10 @@ export interface BaseTemplate {
    */
   rules?: any[]
   /**
-     * 是否必填
-     */
+   * 是否必填
+   */
   require?: boolean
+  fixed?: boolean
 }
 
 export interface OptionsConfiguration {

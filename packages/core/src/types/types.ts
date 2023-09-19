@@ -1,3 +1,8 @@
+import type { HttpAdapters } from 'packages/core/http'
+import type { Renderer } from 'packages/renderer'
+import type { LayoutProvider } from 'packages/layout-provider'
+import type { Templates } from './options'
+
 export interface App {
   install: (app, options?: { name?: string }) => void
   use: (installPlugin: InstallPlugin) => void
@@ -27,4 +32,30 @@ export interface AppProvider {
     current: string
     size: string
   }
+}
+
+export interface FuzzyPlugin {
+  install: (templates: Templates[]) => Templates[]
+}
+
+/**
+ * 创造FuzzyApp需要提供的适配器
+ */
+export interface Adapters {
+  renderer: Renderer
+  http: HttpAdapters
+  layout: LayoutProvider
+  lang: {
+    update: string
+    delete: string
+    create: string
+    success: string
+    warning: string
+    fail: string
+  }
+  paging: {
+    current: string
+    size: string
+  }
+  plugins?: FuzzyPlugin[]
 }

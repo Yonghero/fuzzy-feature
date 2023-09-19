@@ -1,2 +1,2 @@
-export { FuzzyUIRenderer } from './src'
+export { FuzzyUIRenderer } from './fuzzy-ui'
 export * from './types-renderer'

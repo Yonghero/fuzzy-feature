@@ -9,7 +9,7 @@ export {
   defineConfig,
 } from './core'
 
-export { FuzzyUIRenderer } from './renderer/index'
-export { DefaultLayoutProvider } from './layout-provider/index'
+export { FuzzyUIRenderer } from './renderer'
+export { DefaultLayoutProvider } from './layout-provider'
 
-export type { Handlers, OptionsConfiguration, HttpProvider } from './core'
+export type { Handlers, OptionsConfiguration, HttpProvider, Templates } from './core'

@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
-import type { LayoutRenderer, LayoutSlots } from '../types'
+import type { LayoutRenderer, LayoutSlots } from './types'
 
 export const DefaultLayoutProvider = defineComponent({
   props: {

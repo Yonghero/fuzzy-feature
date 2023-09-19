@@ -6,6 +6,7 @@ import type { LayoutProvider } from 'packages/layout-provider'
 import type { OptionsConfiguration } from '../types/options'
 import type { Handlers } from '../types/handlers'
 import { useActivated } from '../utils/useActivated'
+import { injectPlugins } from '../utils/injectPlugins'
 import { injectAppProvider } from './provider'
 import { starter } from './starter'
 import { mergeHandlers, mergeOptions } from './test-options'
@@ -61,6 +62,8 @@ export function createViewer(adapters: Adapters) {
       const activatedProps = useActivated(computed(() => props), activeTabIdx)
 
       const dynamicLayout = computed(() => {
+        injectPlugins(adapters, activatedProps)
+
         const renderer = props.renderer
         const http = props.http
         const { components } = starter({ renderer, http, activatedProps })

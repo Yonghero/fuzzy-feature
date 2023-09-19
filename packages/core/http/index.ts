@@ -1,2 +1,2 @@
 export * from './types-http'
-export * from './src/default-http-adapaters'
+export * from './default-http-adapaters'

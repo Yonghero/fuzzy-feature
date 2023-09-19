@@ -1,7 +1,5 @@
 import type { Component, DefineComponent, VNode } from 'vue'
 import type { Templates } from 'packages/core/src/types/options'
-import type { HttpAdapters } from '../core/http/types-http'
-import type { LayoutProvider } from './../layout-provider/types'
 
 /**
  * 筛选面板组件实现
@@ -65,31 +63,6 @@ export interface Renderer {
   dialogForm: DialogFormRenderer
   message: MessageRenderer
   tableHeader: TableHeader
-}
-
-/**
- * 创造FuzzyApp需要提供的适配器
- */
-export interface Adapters {
-  renderer: Renderer
-  http: HttpAdapters
-  layout: LayoutProvider
-  lang: {
-    update: string
-    delete: string
-    create: string
-    success: string
-    warning: string
-    fail: string
-  }
-  paging: {
-    current: string
-    size: string
-  }
-}
-
-export interface FuzzyPlugins {
-
 }
 
 export type ExtraRenderer = Component[] | Element[] | VNode[]

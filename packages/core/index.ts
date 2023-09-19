@@ -8,10 +8,9 @@ export {
   $workInFuzzyOptions,
 } from './src'
 
-export { FuzzyUIRenderer } from '../renderer/index'
-export { HttpImp } from './http/index'
-export { DefaultLayoutProvider } from '../layout-provider/index'
+export * from './http'
 
-export type { Handlers } from './src/types/handlers'
-export type { OptionsConfiguration } from './src/types/options'
-export type { HttpProvider } from './src/types/provider'
+export * from './src/types/handlers'
+export * from './src/types/options'
+export * from './src/types/provider'
+export * from './src/types/types'

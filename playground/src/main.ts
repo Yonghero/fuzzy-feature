@@ -4,7 +4,9 @@ import routes from 'virtual:generated-pages'
 
 // @ts-expect-error anyway
 import FuzzyUI from '@hitotek/fuzzy-ui'
+import type { Templates } from 'packages/core/src/types/options'
 import { DefaultLayoutProvider, FuzzyUIRenderer, HttpImp, createFuzzyApp } from '../../packages/core/index'
+import type { FuzzyPlugin } from './../../packages/renderer/types-renderer'
 import App from './App.vue'
 
 import '@hitotek/fuzzy-ui/style' // UI 样式
@@ -12,6 +14,13 @@ import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
 import 'element-plus/dist/index.css'
+
+class FixedTemplatesPlugin implements FuzzyPlugin {
+  install(templates: Templates[]) {
+    templates[0].fixed = true
+    return templates
+  }
+}
 
 const fuzzyApp = createFuzzyApp({
   renderer: new FuzzyUIRenderer(),
@@ -29,6 +38,7 @@ const fuzzyApp = createFuzzyApp({
     current: 'current',
     size: 'size',
   },
+  plugins: [new FixedTemplatesPlugin()],
 })
 
 const app = createApp(App)

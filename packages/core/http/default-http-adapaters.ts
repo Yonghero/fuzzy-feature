@@ -1,4 +1,4 @@
-import type { HttpAdapters, Response } from '../types-http'
+import type { HttpAdapters, Response } from './types-http'
 
 export class HttpImp implements HttpAdapters {
   async get(url: string, params: any) {

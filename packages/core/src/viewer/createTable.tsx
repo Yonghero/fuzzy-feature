@@ -17,6 +17,8 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       const deleteVisible = options?.feature?.delete
       const updateVisible = options?.feature?.update
 
+      console.log('templates: ', templates)
+
       if (deleteVisible || updateVisible) {
         if (templates.some(tmpl => tmpl.label === '操作'))
           return

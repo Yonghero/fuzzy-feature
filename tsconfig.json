@@ -21,8 +21,10 @@
     "paths": {
       "packages/*": ["./packages/*"]
     },
+    "types": [
+      "vite/client",
+    ],
   },
-  "types": ["@hitotek/fuzzy-ui"],
   "include": ["packages"],
   "exclude": [
     "node_modules"
