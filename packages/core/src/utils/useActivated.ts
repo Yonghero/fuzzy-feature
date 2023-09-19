@@ -1,14 +1,27 @@
+import type { ComputedRef, DefineComponent, RendererElement, RendererNode, VNode } from 'vue'
 import { computed, markRaw, unref } from 'vue'
+import type { OptionsConfiguration } from '../types/options'
+import type { Handlers } from '../types/handlers'
 import { isDeep, transferToArray } from './merge'
 
-export function useActivated(props, activeMenuIndex) {
+export interface ActivatedReturnValue {
+  options: ComputedRef<OptionsConfiguration>
+  extraRenderer: ComputedRef<VNode<RendererNode, RendererElement, {
+    [key: string]: any
+  }>[]>
+  layoutProvider: ComputedRef<DefineComponent<any>>
+  handlers: ComputedRef<Handlers>
+  mergeOptions: ComputedRef<OptionsConfiguration[]>
+}
+
+export function useActivated(props, activeMenuIndex): ActivatedReturnValue {
   const _p = unref(props)
 
   // 合并options 为多tab页做准备
-  const mergeOptions = computed(() => transferToArray(_p.options))
+  const mergeOptions = computed<OptionsConfiguration[]>(() => transferToArray(_p.options))
 
   // 激活的页面配置
-  const options = computed(() => mergeOptions.value[activeMenuIndex.value])
+  const options = computed<OptionsConfiguration>(() => mergeOptions.value[activeMenuIndex.value])
 
   // 合并扩展组件
   const mergeExtraRenderer = computed(() => {
@@ -31,7 +44,7 @@ export function useActivated(props, activeMenuIndex) {
   const mergeLayoutProvider = computed(() => transferToArray(_p.layout))
 
   // 激活的布局器
-  const layoutProvider = computed(() => {
+  const layoutProvider = computed<DefineComponent<any>>(() => {
     if (mergeLayoutProvider.value.length === mergeOptions.value.length)
       return markRaw(mergeLayoutProvider.value[activeMenuIndex.value])
     return markRaw(mergeLayoutProvider.value[0])
@@ -41,7 +54,7 @@ export function useActivated(props, activeMenuIndex) {
   const mergeHandlers = computed(() => transferToArray(_p.handlers))
 
   // 激活的处理函数
-  const handlers = computed(() => mergeHandlers.value[activeMenuIndex.value])
+  const handlers = computed<Handlers>(() => mergeHandlers.value[activeMenuIndex.value])
 
   return {
     options,

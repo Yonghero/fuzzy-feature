@@ -1,5 +1,4 @@
-import type { Adapters } from 'packages/renderer'
-import type { App } from './types/types'
+import type { Adapters, App } from './types/types'
 import { createViewer } from './viewer'
 
 /**
