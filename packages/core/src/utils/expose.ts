@@ -9,6 +9,7 @@ import type { OptionsConfiguration } from './../types/options'
 export const workInProgressFuzzy = {
   shallowUpdate: p => p,
   shallowDelete: p => p,
+  invokeUpdate: p => p,
   dataProvider: ref<WorkInData>(),
   options: ref<OptionsConfiguration>(),
 }
@@ -39,6 +40,9 @@ export function $workInFuzzyOptions() {
   return workInProgressFuzzy.options
 }
 
+export function $invokeUpdateEvent(e) {
+  return workInProgressFuzzy.invokeUpdate(e)
+}
 /**
  * 组件尺寸
  */

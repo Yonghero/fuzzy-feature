@@ -6,6 +6,7 @@ import type { DataProvider, HttpProvider } from '../types/provider'
 import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
 import type { Handlers } from '../types/handlers'
+import { workInProgressFuzzy } from '../utils/expose'
 import { getAppProviderValue } from './provider'
 
 export function createDialogForm(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers) {
@@ -17,17 +18,20 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
     })
   }
 
-  return {
-    async invokeUpdateEvent(e) {
-      provider.dialog.data = { ...e }
-      // 编辑前hook注入
-      if (handlers.updateBeforePop) {
-        const row = await handlers.updateBeforePop({ data: { e } })
-        provider.dialog.data = { ...row }
-      }
+  async function invokeUpdateEvent(e) {
+    provider.dialog.data = { ...e }
+    // 编辑前hook注入
+    if (handlers.updateBeforePop) {
+      const row = await handlers.updateBeforePop({ data: { e } })
+      provider.dialog.data = { ...row }
+    }
+    setDialogConfig('update')
+  }
 
-      setDialogConfig('update')
-    },
+  workInProgressFuzzy.invokeUpdate = invokeUpdateEvent
+
+  return {
+    invokeUpdateEvent,
     invokeCreateEvent() {
       provider.dialog.data = { }
       setDialogConfig('create')

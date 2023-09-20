@@ -66,9 +66,6 @@ export function createHttp(options, handlers, http: HttpAdapters, dataProvider: 
   // 暴露get请求
   workInProgressFuzzy.shallowUpdate = get
 
-  // 暴露删除请求
-  workInProgressFuzzy.shallowDelete = deleteHttp
-
   return {
     get,
     post,

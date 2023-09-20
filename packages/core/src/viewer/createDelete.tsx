@@ -4,6 +4,7 @@ import type { DataProvider, HttpProvider } from '../types/provider'
 import type { Handlers } from '../types/handlers'
 import { AppProviderKey } from '../types/types'
 import type { OptionsConfiguration } from '../types/options'
+import { workInProgressFuzzy } from '../utils/expose'
 import { getAppProviderValue } from './provider'
 
 export default function createDelete(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers) {
@@ -77,15 +78,19 @@ export default function createDelete(renderer: Renderer, options: OptionsConfigu
     deletePrompt.tagText = textReader.getText('tagText')
   }
 
-  return {
-    invokeDeleteEvent(e) {
-      deleteData = e
-      setDeletePromptText(e)
+  function invokeDeleteEvent(e) {
+    deleteData = e
+    setDeletePromptText(e)
 
-      setTimeout(() => {
-        visibleDeleteDialog.value = true
-      }, 50)
-    },
+    setTimeout(() => {
+      visibleDeleteDialog.value = true
+    }, 50)
+  }
+
+  workInProgressFuzzy.shallowDelete = invokeDeleteEvent
+
+  return {
+    invokeDeleteEvent,
     render: defineComponent({
       setup() {
         return () => (
