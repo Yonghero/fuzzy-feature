@@ -12,6 +12,7 @@ import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 class FixedTemplatesPlugin implements FuzzyPlugin {
   install(templates: Templates[]) {
@@ -51,3 +52,11 @@ app.use(fuzzyApp)
 
 app.use(router)
 app.mount('#app')
+
+app.config.warnHandler = (msg) => {
+  if (msg.includes('[Vue warn]: Invalid prop: type check failed for prop "loading". Expected Object, got Boolean with value false. '))
+    return null
+  if (msg.includes('Invalid prop: type check failed for prop "style". Expected Object, got String with value "height'))
+    return null
+  return msg
+}

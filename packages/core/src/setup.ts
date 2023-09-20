@@ -12,12 +12,7 @@ export function createFuzzyApp(adapters: Adapters): App {
     app.component(appName, createViewer(adapters))
   }
 
-  function use() {
-
-  }
-
   return {
     install,
-    use,
   }
 }

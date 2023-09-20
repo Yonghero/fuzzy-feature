@@ -6,6 +6,7 @@ export {
   mergeFuzzyOptions,
   defineConfig,
   $workInFuzzyOptions,
+  $invokeUpdateEvent,
 } from './src'
 
 export * from './http'

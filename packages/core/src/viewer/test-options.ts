@@ -1,6 +1,7 @@
 import type { Handlers } from '../types/handlers'
 import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
+import useActionChip from './useActionChip'
 
 export const testOptions = defineConfig({
   id: 'vcenter_2_1_1',
@@ -33,11 +34,13 @@ export const testOptions = defineConfig({
         filter: false,
         update: true,
       },
+      ...useActionChip(),
     },
     {
       label: '负责人',
       type: 'input',
       value: 'fzr',
+
       onChange({ value }) {
         // console.log('🚀 ~ file: basic.vue:11 ~ onChange ~ e:', value)
       },

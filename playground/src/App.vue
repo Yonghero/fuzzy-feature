@@ -1,5 +1,6 @@
 <script setup>
-import { FYInput, FYTree } from '@hitotek/fuzzy-ui'
+import { FYButton, FYInput, FYTree } from '@hitotek/fuzzy-ui'
+import { $invokeUpdateEvent } from '../../packages'
 
 // import { $insideReactiveValue } from 'packages/core'
 
@@ -12,11 +13,15 @@ const helloRef = ref('hello')
 function onSelection(v) {
   // console.log('🚀 ~ file: App.vue:13 ~ onSelection ~ v:', v)
 }
+
+function invokeUpdate() {
+  $invokeUpdateEvent()
+}
 </script>
 
 <template>
   <main w="full" h="full">
-    <FuzzyViewer @selection="onSelection">
+    <FuzzyViewer :extra-renderer="[h(FYButton, { onClick: invokeUpdate }, 'invokeUpdate')]" @selection="onSelection">
       <template #tree>
         <div class="w-full h-full flex flex-col gap-y-2 bg-[#FAFAFA] items-center">
           <div class="w-full flex justify-between h-15 px-5 items-center">

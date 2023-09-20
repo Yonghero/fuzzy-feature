@@ -6,6 +6,7 @@ export {
   mergeFuzzyOptions,
   HttpImp,
   $workInFuzzyOptions,
+  $invokeUpdateEvent,
   defineConfig,
 } from './core'
 

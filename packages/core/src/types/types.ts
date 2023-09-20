@@ -5,7 +5,6 @@ import type { Templates } from './options'
 
 export interface App {
   install: (app, options?: { name?: string }) => void
-  use: (installPlugin: InstallPlugin) => void
 }
 
 export type InstallPlugin = (implPlugin: ImplPlugins) => void

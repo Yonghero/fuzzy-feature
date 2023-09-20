@@ -14,9 +14,6 @@ export const DefaultLayoutProvider = defineComponent({
     },
   },
   setup(props) {
-    console.log(props.renderer.delete, 'props.renderer.delete')
-    console.log(props.renderer.dialogForm)
-
     const BaseLayout = computed(() => (
       <>
        {/* height: 100% - 分页器的高度 */}
