@@ -23,23 +23,22 @@ export function starter({ renderer, http, activatedProps }) {
 
   // 请求提供
   const httpProvider = createHttp(unref(activatedProps.options), unref(activatedProps.handlers), http, dataProvider)
+  // 创建表单对话框
+  const { render: dialogForm, invokeCreateEvent, invokeUpdateEvent } = createDialogForm(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
 
   // 创建查询组件
   const filter = createFilter(renderer.filter, unref(activatedProps.options), httpProvider)
 
   // 创建扩展组件
-  const extra = createExtra(renderer, unref(activatedProps.options), unref(activatedProps.extraRenderer), dataProvider)
+  const extra = createExtra(renderer, unref(activatedProps.options), unref(activatedProps.extraRenderer), invokeCreateEvent)
 
   const { render, invokeDeleteEvent } = createDelete(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
 
   // 创建表格组件
-  const table = createTable(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers), invokeDeleteEvent)
+  const table = createTable(renderer, unref(activatedProps.options), dataProvider, unref(activatedProps.handlers), invokeDeleteEvent, invokeUpdateEvent)
 
   // 创建分页组件
   const pagination = createPagination(renderer.pagination, unref(activatedProps.options), dataProvider, httpProvider)
-
-  // 创建表单对话框
-  const dialogForm = createDialogForm(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
 
   return {
     components: {
