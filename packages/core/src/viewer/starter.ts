@@ -9,6 +9,7 @@ import { createPagination } from './createPagination'
 import { createDialogForm } from './createDialogForm'
 import { createExtra } from './createExtra'
 import { createHttp } from './createHttp'
+import createDelete from './createDelete'
 
 export interface StarterOptions {
   renderer: Renderer
@@ -29,8 +30,10 @@ export function starter({ renderer, http, activatedProps }) {
   // 创建扩展组件
   const extra = createExtra(renderer, unref(activatedProps.options), unref(activatedProps.extraRenderer), dataProvider)
 
+  const { render, invokeDeleteEvent } = createDelete(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
+
   // 创建表格组件
-  const table = createTable(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
+  const table = createTable(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers), invokeDeleteEvent)
 
   // 创建分页组件
   const pagination = createPagination(renderer.pagination, unref(activatedProps.options), dataProvider, httpProvider)
@@ -45,6 +48,7 @@ export function starter({ renderer, http, activatedProps }) {
       pagination,
       dialogForm,
       extra,
+      delete: render,
     },
   }
 }

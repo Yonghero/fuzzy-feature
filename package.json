@@ -40,13 +40,12 @@
     "build": "rimraf lib && vite build && tsc -p ./tsconfig.json",
     "lint": "eslint .",
     "release": "bumpp && nr build && npm publish",
-    "typecheck": "tsc --noEmit",
     "playground": "cd ./playground && nr dev"
   },
   "peerdependencies": {
     "element-plus": "^2.3.9",
     "vue": "^3.2.26",
-    "@hitotek/fuzzy-ui": "1.0.16"
+    "@hitotek/fuzzy-ui": "1.0.17-beta.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
@@ -54,7 +53,7 @@
     "@antfu/utils": "^0.7.6",
     "@babel/core": "^7.22.19",
     "@babel/preset-env": "^7.22.15",
-    "@hitotek/fuzzy-ui": "1.0.16",
+    "@hitotek/fuzzy-ui": "1.0.17-beta.0",
     "@types/node": "^20.6.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitejs/plugin-vue-jsx": "^3.0.2",

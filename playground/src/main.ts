@@ -2,11 +2,9 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from 'virtual:generated-pages'
 
-// @ts-expect-error anyway
 import FuzzyUI from '@hitotek/fuzzy-ui'
-import type { Templates } from 'packages/core/src/types/options'
-import { DefaultLayoutProvider, FuzzyUIRenderer, HttpImp, createFuzzyApp } from '../../packages/core/index'
-import type { FuzzyPlugin } from './../../packages/renderer/types-renderer'
+import type { FuzzyPlugin, Templates } from '../../packages'
+import { DefaultLayoutProvider, FuzzyUIRenderer, HttpImp, createFuzzyApp } from '../../packages'
 import App from './App.vue'
 
 import '@hitotek/fuzzy-ui/style' // UI 样式

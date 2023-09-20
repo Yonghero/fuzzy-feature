@@ -12,4 +12,4 @@ export {
 export { FuzzyUIRenderer } from './renderer'
 export { DefaultLayoutProvider } from './layout-provider'
 
-export type { Handlers, OptionsConfiguration, HttpProvider, Templates } from './core'
+export type { Handlers, OptionsConfiguration, HttpProvider, Templates, FuzzyPlugin } from './core'

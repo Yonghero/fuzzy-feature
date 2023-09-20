@@ -7,7 +7,7 @@ import type { DataProvider, HttpProvider } from '../types/provider'
 import type { Handlers } from '../types/handlers'
 import { getAppProviderValue } from './provider'
 
-export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers) {
+export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers, invokeDeleteEvent) {
   const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, 'table')
 
   return defineComponent({
@@ -17,7 +17,17 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       const deleteVisible = options?.feature?.delete
       const updateVisible = options?.feature?.update
 
-      console.log('templates: ', templates)
+      const deletePrompt = {
+        // 标题
+        title: '确认删除',
+        // 业务类型
+        type: 'delete',
+        // 删除对象字段名
+        businessType: '',
+        // tag文字
+        tagText: '本条数据',
+        customDesc: '',
+      }
 
       if (deleteVisible || updateVisible) {
         if (templates.some(tmpl => tmpl.label === '操作'))
@@ -62,8 +72,15 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
                   type="danger"
                   link
                   onClick={() => {
-                    provider.dialog.data = { ...scope.row }
-                    visibleDeleteDialog.value = true
+                    invokeDeleteEvent({ ...scope.row })
+                    // provider.dialog.data = { ...scope.row }
+                    // visibleDeleteDialog.value = true
+                    // const tagText = options.lang?.deletePrompt?.tagText
+                    // if (typeof tagText === 'function')
+                    //   deletePrompt.tagText = tagText(scope.row)
+
+                    // if (typeof tagText === 'string')
+                    //   deletePrompt.tagText = tagText
                   }}
                 >
                   { getAppProviderValue(AppProviderKey.Lang).delete }
@@ -143,18 +160,8 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
             v-model={visibleDeleteDialog.value}
             onConfirm={handleDeleteConfirm}
             onCancel={handleDeleteCancel}
-            dialogConfig={{
-              // 标题
-              title: '确认删除',
-              // 业务类型
-              type: 'delete',
-              // 删除对象字段名
-              businessType: '',
-              // tag文字
-              tagText: '本条数据',
-              customDesc: '',
-            }}
-        />
+            dialogConfig={deletePrompt}
+          />
       </>
       )
     },

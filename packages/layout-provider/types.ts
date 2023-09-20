@@ -7,6 +7,7 @@ export interface LayoutRenderer {
   dialogForm: DefineComponent
   menu: DefineComponent
   extra: DefineComponent
+  delete: DefineComponent
 }
 
 export interface LayoutSlots {

@@ -9,6 +9,11 @@ export const testOptions = defineConfig({
   table: {
 
   },
+  lang: {
+    deletePrompt: {
+      tagText: data => 'test del',
+    },
+  },
   feature: {
     update: true,
     delete: true,

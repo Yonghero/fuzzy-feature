@@ -74,10 +74,19 @@ export interface BaseTemplate {
   fixed?: boolean
 }
 
+type LangText = string | ((data: object | object[]) => string)
+
+export interface Lang {
+  deletePrompt?: {
+    title?: LangText // 删除弹窗标题
+    tagText?: LangText // 删除的提示文字
+    customDesc?: LangText
+  }
+}
 export interface OptionsConfiguration {
   id?: string
   title: string | Ref<string>
-  api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string> | any
+  api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string>
   /**
    * 是否开启增删改查中其中一项功能
    * 默认全部开启
@@ -87,6 +96,11 @@ export interface OptionsConfiguration {
    * 需要展示的每个字段 可配置每个字段对应的功能
    */
   templates: Templates[]
+
+  /**
+   * 配置页面内部分操作的展示文字
+   */
+  lang?: Lang
   /**
    * 配置表格的特有属性
    */
