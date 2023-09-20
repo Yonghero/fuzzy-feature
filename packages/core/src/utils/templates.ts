@@ -11,7 +11,8 @@ export function mapTemplatesOfFeature(templates: Templates[], feature) {
   return templates.filter((item) => {
     if (!item.visible)
       return true
-    return !!(item.visible && (item.visible[feature] || item.visible[feature] === undefined))
+      // || item.visible[feature] === undefined
+    return !!(item.visible && (item.visible[feature]))
   })
 }
 
