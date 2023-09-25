@@ -3,7 +3,7 @@ import type { ActivatedReturnValue } from './useActivated'
 
 export function injectPlugins(adapters: Adapters, activatedProps: ActivatedReturnValue) {
   const hasPlugins = !!adapters?.plugins?.length
-  const hasTemplates = !!activatedProps?.options?.value?.templates.length
+  const hasTemplates = !!activatedProps?.options?.value?.templates?.length
 
   if (hasPlugins && hasTemplates) {
     (adapters.plugins!).reduce((templates, plugin) => {

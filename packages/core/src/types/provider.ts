@@ -1,5 +1,6 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import type { Response } from 'packages/core/http/types-http'
+import type { Type } from '../utils/templates'
 
 export interface ValueOfProvide {
   filterParams: Ref<Record<string, any>>
@@ -29,7 +30,7 @@ export interface DataProvider extends ValueOfProvide {
 export interface DialogProps {
   visible: boolean
   data: any
-  type: 'update' | 'create'
+  type: Type
   title: string
 }
 

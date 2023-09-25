@@ -1,4 +1,4 @@
-import { computed, reactive, ref } from 'vue'
+import { computed, nextTick, reactive, ref } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { workInProgressFuzzy } from '../utils/expose'
 import { AppProviderKey } from '../types/types'
@@ -61,7 +61,9 @@ export function createDataProvider(): DataProvider {
       setFilterParams(params) {
         filterParams.value = { ...filterParams.value, ...params }
       },
-      setTableData(data) {
+      async setTableData(data) {
+        tableData.value = []
+        await nextTick()
         tableData.value = data
       },
       setTotal(num) {

@@ -13,7 +13,15 @@ export interface Feature {
   delete?: boolean
 }
 
+export interface Value {
+  filter: string
+  update: string
+  create: string
+  table: string
+}
+
 export type Templates = BaseTemplate
+export type Where = 'eq' | 'like' | 'notLike' | 'likeLeft' | 'likeRight' | 'ne' | 'gt' | 'ge' | 'lt' | 'le' | 'between' | 'notBetween' | 'isNull' | 'isNotNull' | 'in' | 'notIn' | 'orderByAsc' | 'orderByDesc'
 
 export interface BaseTemplate {
   /**
@@ -23,7 +31,11 @@ export interface BaseTemplate {
   /**
    *  后端需要的字段值
    */
-  value: string
+  value: string | Value
+  /**
+   * 接口传参操作符
+   */
+  where?: Where
   /**
    * 数据默认值
    */

@@ -12,6 +12,7 @@ export interface LayoutRenderer {
 
 export interface LayoutSlots {
   tree: () => JSX.Element
+  default: () => JSX.Element
 }
 
 export interface LayoutProviderProps {

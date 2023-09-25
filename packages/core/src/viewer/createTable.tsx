@@ -1,14 +1,21 @@
 import type { Renderer } from 'packages/renderer/types-renderer'
 import { defineComponent, unref } from 'vue'
 import type { OptionsConfiguration } from '../types/options'
-import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
+import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
 import type { DataProvider } from '../types/provider'
 import type { Handlers } from '../types/handlers'
 import { getAppProviderValue } from './provider'
 
+function deleteTypeInTable(templates) {
+  return templates.map((tmpl) => {
+    delete tmpl.type
+    return tmpl
+  })
+}
+
 export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, handlers: Handlers, invokeDeleteEvent, invokeUpdateEvent) {
-  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, 'table')
+  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplateDefaultValue, deleteTypeInTable])(options.templates, 'table')
 
   return defineComponent({
     setup() {
@@ -31,7 +38,9 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
               <renderer.button.render
                 type="primary"
                 link
-                onClick={async () => await invokeUpdateEvent({ ...scope.row })}
+                onClick={async () => {
+                  await invokeUpdateEvent({ ...scope.row })
+                }}
               >
                 { getAppProviderValue(AppProviderKey.Lang).update }
               </renderer.button.render>
@@ -77,6 +86,8 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
       return () => (
         <>
           <renderer.table.render
+            pageSize={unref(provider.pageSize)}
+            pageCurrent={unref(provider.currentPage)}
             templates={templates}
             selection={options?.table?.selection}
             index={options?.table?.index}

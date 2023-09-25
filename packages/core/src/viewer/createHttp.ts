@@ -1,15 +1,18 @@
 import { unref } from 'vue'
 import type { HttpAdapters } from 'packages/core/http/types-http'
-import type { Api } from '../types/options'
+import type { Api, OptionsConfiguration } from '../types/options'
 import type { DataProvider } from '../types/provider'
 import { workInProgressFuzzy } from '../utils/expose'
+import { mapTemplatesOfFeature, mapTemplatesValue, templateMiddleWare } from '../utils/templates'
 
-export function createHttp(options, handlers, http: HttpAdapters, dataProvider: DataProvider) {
+export function createHttp(options: OptionsConfiguration, handlers, http: HttpAdapters, dataProvider: DataProvider) {
   function getApi(mode: keyof Api) {
     if (typeof unref(options.api) === 'string')
       return unref(options.api)
     return unref(options.api[mode])
   }
+
+  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesValue])(options.templates, 'filter')
 
   async function get(reqParams) {
     dataProvider.filterParams.value = {
@@ -31,7 +34,7 @@ export function createHttp(options, handlers, http: HttpAdapters, dataProvider: 
     // 表格loading...
     dataProvider.dispatch.setTableLoading(true)
 
-    const response = await http.get(getApi('filter'), { ...dataProvider.filterParams.value })
+    const response = await http.get(getApi('filter'), { ...dataProvider.filterParams.value }, templates)
 
     // 请求成功！
     if (response.success) {
@@ -52,11 +55,11 @@ export function createHttp(options, handlers, http: HttpAdapters, dataProvider: 
   }
 
   async function put(reqParams) {
-    return http.post(getApi('update'), reqParams)
+    return http.put(getApi('update'), reqParams)
   }
 
   async function post(reqParams) {
-    return http.put(getApi('create'), reqParams)
+    return http.post(getApi('create'), reqParams)
   }
 
   async function deleteHttp(reqParams) {

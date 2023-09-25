@@ -1,9 +1,9 @@
-import { computed, defineComponent, nextTick, unref } from 'vue'
+import { computed, defineComponent, unref } from 'vue'
 import type { Renderer } from 'packages/renderer/types-renderer'
 import { FYDialog } from '@hitotek/fuzzy-ui'
 import type { OptionsConfiguration } from '../types/options'
 import type { DataProvider, HttpProvider } from '../types/provider'
-import { mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
+import { mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplatesValue, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
 import type { Handlers } from '../types/handlers'
 import { workInProgressFuzzy } from '../utils/expose'
@@ -13,16 +13,15 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
   function setDialogConfig(type) {
     provider.dialog.type = type
     provider.dialog.title = getAppProviderValue(AppProviderKey.Lang)[type] + options.title
-    nextTick(() => {
-      provider.dialog.visible = true
-    })
+    provider.dialog.visible = true
   }
 
   async function invokeUpdateEvent(e) {
     provider.dialog.data = { ...e }
+
     // 编辑前hook注入
     if (handlers.updateBeforePop) {
-      const row = await handlers.updateBeforePop({ data: { e } })
+      const row = await handlers.updateBeforePop({ data: { ...e } })
       provider.dialog.data = { ...row }
     }
     setDialogConfig('update')
@@ -41,7 +40,7 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
         const dialogConfig = computed(() => ({
           fullTitle: provider.dialog.title,
           type: provider.dialog.type,
-          template: templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer])(options.templates, provider.dialog.type),
+          template: templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplatesValue])(options.templates, provider.dialog.type),
         }))
 
         async function handleSubmit(formModel) {
@@ -80,8 +79,10 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
             renderer.message.render.success(`${unref(provider.dialog.title)}${getAppProviderValue(AppProviderKey.Lang).success || '成功'}`)
             return
           }
-          // 表单提交失败
-          renderer.message.render.warning(response.message)
+          if (response.message) {
+            // 表单提交失败
+            renderer.message.render.warning(response.message)
+          }
         }
 
         function handleCancel() {

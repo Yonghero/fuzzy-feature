@@ -1,10 +1,10 @@
 import type { FilterRenderer } from 'packages/renderer/types-renderer'
 import type { OptionsConfiguration } from '../types/options'
-import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
+import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplatesValue, templateMiddleWare } from '../utils/templates'
 import type { HttpProvider } from '../types/provider'
 
 export function createFilter(Filter: FilterRenderer, options: OptionsConfiguration, httpProvider: HttpProvider) {
-  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplateDefaultValue, mapTemplatesRenderer])(options.templates, 'filter')
+  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplateDefaultValue, mapTemplatesRenderer, mapTemplatesValue])(options.templates, 'filter')
 
   // 过滤出输入框类型的tmpl
   const inputTemplates = templates.filter(tmpl => tmpl.type === 'input')

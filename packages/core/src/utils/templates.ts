@@ -1,6 +1,19 @@
 import { unref } from 'vue'
 import type { Templates } from '../types/options'
 
+export interface TemplateMiddlewareCallback {
+  (templates: Templates[], type: Type): Templates[]
+}
+
+export type Type = 'filter' | 'update' | 'create' | 'table'
+export function templateMiddleWare(callback: TemplateMiddlewareCallback[]) {
+  return (templates, type: Type) => {
+    return callback.reduce((templates, callback) => {
+      return callback(templates, type)
+    }, templates)
+  }
+}
+
 /**
  * 功能启停
  * @param templates
@@ -10,18 +23,10 @@ import type { Templates } from '../types/options'
 export function mapTemplatesOfFeature(templates: Templates[], feature) {
   return templates.filter((item) => {
     if (!item.visible)
-      return true
+      return false
       // || item.visible[feature] === undefined
     return !!(item.visible && (item.visible[feature]))
   })
-}
-
-export function templateMiddleWare(callback: TemplateMiddlewareCallback[]) {
-  return (templates, type) => {
-    return callback.reduce((templates, callback) => {
-      return callback(templates, type)
-    }, templates)
-  }
 }
 
 /**
@@ -55,6 +60,19 @@ export function mapTemplatesRenderer(templates: Templates[], type) {
   })
 }
 
-export interface TemplateMiddlewareCallback {
-  (templates: Templates[], type: string): Templates[]
+/**
+ *
+ * @param templates
+ * @param type
+ */
+export function mapTemplatesValue(templates: Templates[], type) {
+  return templates.map((template) => {
+    const tmpl = { ...template }
+    if (tmpl.value && tmpl.value[type])
+      tmpl.value = tmpl.value[type]
+    else if (tmpl.value && typeof tmpl.value === 'object' && tmpl.value.table)
+      tmpl.value = tmpl.value.table
+
+    return tmpl
+  })
 }

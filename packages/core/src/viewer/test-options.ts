@@ -33,6 +33,7 @@ export const testOptions = defineConfig({
         table: true,
         filter: false,
         update: true,
+        create: true,
       },
       ...useActionChip(),
     },

@@ -23,6 +23,14 @@ export class FuzzyUITableRenderer implements TableRenderer {
         type: Boolean,
         default: true,
       },
+      pageSize: {
+        type: Number,
+        default: 20,
+      },
+      pageCurrent: {
+        type: Number,
+        default: 1,
+      },
       loading: {
         type: Object as PropType<Ref<boolean>>,
         default: ref(false),
@@ -36,6 +44,8 @@ export class FuzzyUITableRenderer implements TableRenderer {
       return () => (
         <div class="h-full fuzzy-ui-table-renderer w-full">
           <FYTable
+            pageSize={props.pageSize}
+            pageCurrent={props.pageCurrent}
             style="height: calc(100% - 0px);"
             max-height="calc(100% + 49px)"
             template={props.templates}

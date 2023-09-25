@@ -1,8 +1,10 @@
+import type { Templates } from '../src/types/options'
+
 /**
  * http 实现层
  */
 export interface HttpAdapters {
-  get (url: string, params?): Promise<Required<Response>>
+  get (url: string, params, templates: Templates): Promise<Required<Response>>
   post (url: string, params?): Promise<Pick<Response, 'message' | 'success' | 'data'>>
   delete (url: string, params?): Promise<Pick<Response, 'success' | 'message'>>
   put (url: string, params?): Promise<Pick<Response, 'message' | 'success' | 'data'>>
