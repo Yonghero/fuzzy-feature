@@ -40,7 +40,7 @@ export function createViewer(adapters: Adapters) {
         default: () => ([]),
       },
       options: {
-        type: Object as PropType<OptionsConfiguration<{ test: 1 }>>,
+        type: Object as PropType<OptionsConfiguration>,
         default: () => (mergeOptions),
       },
       title: {
@@ -67,7 +67,8 @@ export function createViewer(adapters: Adapters) {
       const dynamicLayout = computed(() => {
         injectPlugins(adapters, activatedProps)
 
-        const createInjectValues = unref(activatedProps.options).inject() ?? (() => ({}))
+        // @ts-expect-error anyway
+        const createInjectValues = unref(activatedProps.options).inject ? unref(activatedProps.options)!.inject() : () => ({})
 
         injectValues(activatedProps, createInjectValues)
 

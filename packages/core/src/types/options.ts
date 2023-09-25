@@ -100,7 +100,7 @@ export interface Lang {
     customDesc?: LangText
   }
 }
-export interface OptionsConfiguration<T extends Record<string, any>> {
+export interface OptionsConfiguration {
   id?: string
   title: string | Ref<string>
   api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string>
@@ -118,7 +118,7 @@ export interface OptionsConfiguration<T extends Record<string, any>> {
    * 2. 在每一项template中也同样注入inject函数 调用后可返回当前注入的值
    * @returns
    */
-  inject?: () => () => T
+  inject?: () => () => Record<string, Ref<any>>
   /**
    * 注入插槽
    */

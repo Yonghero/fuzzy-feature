@@ -1,11 +1,10 @@
-import type { Ref } from 'vue'
 import { ref } from 'vue'
 import type { Handlers } from '../types/handlers'
 import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
 import useActionChip from './useActionChip'
 
-export const testOptions = defineConfig<{ count: Ref<number> }>({
+export const testOptions = defineConfig({
   id: 'vcenter_2_1_1',
   title: 'tab1',
   api: '/get/api',
