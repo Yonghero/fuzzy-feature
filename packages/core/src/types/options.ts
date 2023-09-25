@@ -37,6 +37,11 @@ export interface BaseTemplate {
    */
   where?: Where
   /**
+   * 此函数内部注入无需传递，返回值为options的inject的返回值
+   * @returns
+   */
+  inject?: () => any
+  /**
    * 数据默认值
    */
   defaultValue?: {
@@ -95,7 +100,7 @@ export interface Lang {
     customDesc?: LangText
   }
 }
-export interface OptionsConfiguration {
+export interface OptionsConfiguration<T extends Record<string, any>> {
   id?: string
   title: string | Ref<string>
   api: string | Api | Array<string> | Array<Api> | ComputedRef<string> | Ref<string>
@@ -108,7 +113,16 @@ export interface OptionsConfiguration {
    * 需要展示的每个字段 可配置每个字段对应的功能
    */
   templates: Templates[]
-
+  /**
+   * 1. 为slots注入数据
+   * 2. 在每一项template中也同样注入inject函数 调用后可返回当前注入的值
+   * @returns
+   */
+  inject?: () => () => T
+  /**
+   * 注入插槽
+   */
+  slots?: Record<string, any>
   /**
    * 配置页面内部分操作的展示文字
    */

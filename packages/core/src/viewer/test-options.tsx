@@ -1,9 +1,11 @@
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 import type { Handlers } from '../types/handlers'
 import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
 import useActionChip from './useActionChip'
 
-export const testOptions = defineConfig({
+export const testOptions = defineConfig<{ count: Ref<number> }>({
   id: 'vcenter_2_1_1',
   title: 'tab1',
   api: '/get/api',
@@ -13,6 +15,19 @@ export const testOptions = defineConfig({
   lang: {
     deletePrompt: {
       tagText: data => 'test del',
+    },
+  },
+  inject() {
+    const count = ref(1)
+
+    return () => ({
+      count,
+    })
+  },
+  slots: {
+    default: (props) => {
+      console.log('props: ', props)
+      return (<div class="w-20 h-10 bg-red fixed left-0 top-10" onClick={() => {}}>{props.count.value}</div>)
     },
   },
   feature: {

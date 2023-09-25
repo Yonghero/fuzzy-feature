@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, unref } from 'vue'
 import type { ExtraRenderer, Renderer } from 'packages/renderer'
 import type { HttpAdapters } from 'packages/core/http/types-http'
 import type { LayoutProvider } from 'packages/layout-provider'
@@ -8,6 +8,8 @@ import type { Handlers } from '../types/handlers'
 import { useActivated } from '../utils/useActivated'
 import { injectPlugins } from '../utils/injectPlugins'
 import type { Adapters } from '../types/types'
+import wrappedSlots from '../utils/wrappedSlots'
+import injectValues from '../utils/injectValues'
 import { injectAppProvider } from './provider'
 import { starter } from './starter'
 import { mergeHandlers, mergeOptions } from './test-options'
@@ -38,7 +40,7 @@ export function createViewer(adapters: Adapters) {
         default: () => ([]),
       },
       options: {
-        type: Object as PropType<OptionsConfiguration>,
+        type: Object as PropType<OptionsConfiguration<{ test: 1 }>>,
         default: () => (mergeOptions),
       },
       title: {
@@ -65,11 +67,19 @@ export function createViewer(adapters: Adapters) {
       const dynamicLayout = computed(() => {
         injectPlugins(adapters, activatedProps)
 
+        const createInjectValues = unref(activatedProps.options).inject() ?? (() => ({}))
+
+        injectValues(activatedProps, createInjectValues)
+
         const renderer = props.renderer
         const http = props.http
         const { components } = starter({ renderer, http, activatedProps })
+
         return (
-          <props.layout renderer={{ menu, ...components }} slots={slots}></props.layout>
+          <props.layout
+            renderer={{ menu, ...components }}
+            slots={wrappedSlots(activatedProps, slots, createInjectValues)}
+          />
         )
       })
 

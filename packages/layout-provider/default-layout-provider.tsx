@@ -17,7 +17,7 @@ export const DefaultLayoutProvider = defineComponent({
     const BaseLayout = computed(() => (
       <>
        {/* height: 100% - 分页器的高度 */}
-       <div class="w-full h-[calc(100%-65px)] relative">z
+       <div class="w-full h-[calc(100%-65px)] relative">
           <props.renderer.menu class="relative z-1"/>
           <div class="absolute top-[4.2rem] right-4 z-2">
             <props.renderer.extra/>

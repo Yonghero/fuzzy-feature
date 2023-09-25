@@ -12,6 +12,14 @@ export default function useActionChip() {
         type: Boolean,
         default: false,
       },
+      tmplItem: {
+        type: Object,
+        default: () => ({}),
+      },
+      onCountClick: {
+        type: Function,
+        default: () => ({}),
+      },
     },
     emits: ['update:panelVisible'],
     setup(props, { emit }) {
@@ -34,6 +42,7 @@ export default function useActionChip() {
                 label: '删除',
                 onClick() {
                   console.log('删除')
+                  props.onCountClick()
                   emit('update:panelVisible', false)
                 },
               },
@@ -51,7 +60,7 @@ export default function useActionChip() {
 
   return {
     renderer: {
-      table: ({ scope, value }) => {
+      table: ({ scope, value, template }) => {
         return defineComponent({
 
           setup() {
@@ -62,6 +71,9 @@ export default function useActionChip() {
               if (!bool)
                 shapeVisible.value = false
             })
+            // watchEffect(() => {
+            //   console.log('action count watch', template.ref().count.value)
+            // })
 
             return () => (
               <div
@@ -78,7 +90,12 @@ export default function useActionChip() {
                 { shapeVisible.value
                   ? <Shape
                       tableRowData={scope.row}
+                      tmplItem={template}
                       v-model:panelVisible={panelVisible.value}
+                      onCountClick={() => {
+                        template.inject().count.value++
+                        console.log('template.inject().count: ', template.inject().count.value)
+                      }}
                     />
                   : null}
               </div>
