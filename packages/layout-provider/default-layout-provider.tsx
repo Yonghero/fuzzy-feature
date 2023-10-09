@@ -36,8 +36,12 @@ export const DefaultLayoutProvider = defineComponent({
         <props.renderer.dialogForm/>
         <props.renderer.delete/>
         {
-          props?.slots?.default
-            ? props.slots.default()
+          Object.keys(props?.slots).length
+            // eslint-disable-next-line array-callback-return
+            ? Object.keys(props.slots).map((key) => {
+              if (key !== 'tree')
+                return props.slots[key]()
+            })
             : null
         }
       </>

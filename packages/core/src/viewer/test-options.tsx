@@ -24,7 +24,7 @@ export const testOptions = defineConfig({
     })
   },
   slots: {
-    default: (props) => {
+    dialogbox: (props) => {
       console.log('props: ', props)
       return (<div class="w-20 h-10 bg-red fixed left-0 top-10" onClick={() => {}}>{props.count.value}</div>)
     },

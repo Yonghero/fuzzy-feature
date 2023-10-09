@@ -15,7 +15,8 @@ export default function wrappedSlots(activatedProps: ActivatedReturnValue, slots
     const props = createInjectValues()
 
     Object.keys(options.slots).forEach((key) => {
-      wrapperSlots[key] = () => options!.slots[key](props)
+      // @ts-expect-error anyway
+      wrapperSlots[key] = () => options.slots[key](props)
     })
   }
 
