@@ -7,7 +7,7 @@ import type { OptionsConfiguration } from '../types/options'
 import type { Handlers } from '../types/handlers'
 import { useActivated } from '../utils/useActivated'
 import { injectPlugins } from '../utils/injectPlugins'
-import type { Adapters } from '../types/types'
+import type { Adapters, FuzzyPlugin } from '../types/types'
 import wrappedSlots from '../utils/wrappedSlots'
 import injectValues from '../utils/injectValues'
 import { injectAppProvider } from './provider'
@@ -51,6 +51,10 @@ export function createViewer(adapters: Adapters) {
         type: Object as (PropType<Handlers>),
         default: () => (mergeHandlers),
       },
+      plugins: {
+        type: Array as (PropType<FuzzyPlugin[]>),
+        default: () => ([]),
+      },
     },
     setup(props, { slots }) {
       // 注入应用配置
@@ -64,8 +68,12 @@ export function createViewer(adapters: Adapters) {
       // 激活后的组件props
       const activatedProps = useActivated(computed(() => props), activeTabIdx)
 
+      const plugins = computed(() => {
+        return adapters.plugins ? ([...adapters.plugins, ...props.plugins]) : props.plugins
+      })
+
       const dynamicLayout = computed(() => {
-        injectPlugins(adapters, activatedProps)
+        injectPlugins(plugins.value, activatedProps)
 
         // @ts-expect-error anyway
         const createInjectValues = unref(activatedProps.options).inject ? unref(activatedProps.options)!.inject() : () => ({})
