@@ -82,6 +82,7 @@ export function createViewer(adapters: Adapters) {
 
         const renderer = props.renderer
         const http = props.http
+
         const { components } = starter({ renderer, http, activatedProps })
 
         return (

@@ -13,4 +13,7 @@ export default function injectValues(activatedProps: ActivatedReturnValue, creat
       temp.inject = createInjectValues
     })
   }
+
+  const handlers = unref(activatedProps.handlers)
+  handlers.inject = createInjectValues
 }

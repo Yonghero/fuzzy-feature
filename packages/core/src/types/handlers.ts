@@ -1,3 +1,5 @@
+import type { Type } from '../utils/templates'
+
 interface HandlerParams {
   data: any
   url?: string
@@ -57,9 +59,10 @@ export interface Handlers {
   /**
    * 更新成功后
    */
-  updated?: () => any
+  updated?: ({ type, response, formModel }: { type: Type; response: any; formModel: any }) => any
   /**
    * tab change
    */
   tabChange?: () => any
+  inject?: () => () => any
 }

@@ -72,7 +72,7 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
           // 表单提交成功
           if (response.success) {
             if (handlers.updated)
-              handlers.updated()
+              handlers.updated({ type: provider.dialog.type, formModel, response })
 
             provider.dispatch.setDialog({ visible: false, data: {} })
             await httpProvider.get({})
