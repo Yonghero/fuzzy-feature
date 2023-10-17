@@ -31,7 +31,10 @@ export function createDialogForm(renderer: Renderer, options: OptionsConfigurati
 
   return {
     invokeUpdateEvent,
-    invokeCreateEvent() {
+    async invokeCreateEvent() {
+      if (handlers.createBeforePop)
+        await handlers.createBeforePop({ data: {} })
+
       provider.dialog.data = { }
       setDialogConfig('create')
     },
