@@ -12,7 +12,7 @@ import { getAppProviderValue } from './provider'
 export function createDialogForm(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, httpProvider: HttpProvider, handlers: Handlers) {
   function setDialogConfig(type) {
     provider.dialog.type = type
-    provider.dialog.title = getAppProviderValue(AppProviderKey.Lang)[type] + options.title
+    provider.dialog.title = getAppProviderValue(AppProviderKey.Lang)[type] + unref(options.title).slice(0, 2)
     provider.dialog.visible = true
   }
 

@@ -57,7 +57,7 @@ export function createFilter(Filter: FilterRenderer, options: OptionsConfigurati
   return (
     <Filter.render
       onEnter={onEnter}
-      // onInputChange={onInputChange}
+      onInputChange={onEnter}
       onChange={onChange}
       templates={templates}
       onSwitchChange={onSwitchChange}
