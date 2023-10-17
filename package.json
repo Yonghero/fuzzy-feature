@@ -48,18 +48,16 @@
     "@hitotek/fuzzy-ui": "1.0.17-beta.1"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.1.21",
-    "@unocss/preset-icons": "^0.56.5",
-    "unocss": "^0.53.6",
-    "@unocss/eslint-config": "^0.53.6",
-    "@unocss/reset": "^0.53.6",
     "@antfu/eslint-config": "^0.39.8",
     "@antfu/ni": "^0.21.8",
     "@antfu/utils": "^0.7.6",
     "@babel/core": "^7.22.20",
     "@babel/preset-env": "^7.22.20",
-    "@hitotek/fuzzy-ui": "1.0.17-beta.1",
+    "@iconify-json/carbon": "^1.1.21",
     "@types/node": "^20.6.3",
+    "@unocss/eslint-config": "^0.53.6",
+    "@unocss/preset-icons": "^0.56.5",
+    "@unocss/reset": "^0.53.6",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
@@ -76,6 +74,7 @@
     "sass": "^1.67.0",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.2.2",
+    "unocss": "^0.53.6",
     "vite": "^4.4.9",
     "vue": "^3.3.4",
     "vue-demi": "^0.14.6"
@@ -85,5 +84,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "@hitotek/fuzzy-ui": "^1.0.17"
   }
 }

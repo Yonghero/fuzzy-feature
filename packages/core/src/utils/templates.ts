@@ -22,10 +22,25 @@ export function templateMiddleWare(callback: TemplateMiddlewareCallback[]) {
  */
 export function mapTemplatesOfFeature(templates: Templates[], feature) {
   return templates.filter((item) => {
+    // table需要在表格设置内展示字段
+    if (feature === 'table') {
+      if (item.visible && item.visible.table !== undefined)
+        return true
+    }
     if (!item.visible)
       return false
-      // || item.visible[feature] === undefined
+
+    // || item.visible[feature] === undefined
     return !!(item.visible && (item.visible[feature]))
+  })
+}
+
+export function mapTemplatesOfVisible(templates: Templates[], feature) {
+  return templates.map((tmpl) => {
+    const _template = { ...tmpl }
+    if (_template.visible && feature in _template.visible)
+      _template.visible = _template.visible[feature]
+    return _template
   })
 }
 

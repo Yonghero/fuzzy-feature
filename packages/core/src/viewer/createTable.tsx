@@ -1,7 +1,7 @@
 import type { Renderer } from 'packages/renderer/types-renderer'
 import { defineComponent, unref } from 'vue'
 import type { OptionsConfiguration } from '../types/options'
-import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
+import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesOfVisible, mapTemplatesRenderer, templateMiddleWare } from '../utils/templates'
 import { AppProviderKey } from '../types/types'
 import type { DataProvider } from '../types/provider'
 import type { Handlers } from '../types/handlers'
@@ -15,7 +15,7 @@ function deleteTypeInTable(templates) {
 }
 
 export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, handlers: Handlers, invokeDeleteEvent, invokeUpdateEvent) {
-  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplateDefaultValue, deleteTypeInTable])(options.templates, 'table')
+  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplateDefaultValue, deleteTypeInTable, mapTemplatesOfVisible])(options.templates, 'table')
 
   return defineComponent({
     setup() {
@@ -88,7 +88,7 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
           <renderer.table.render
             pageSize={unref(provider.pageSize)}
             pageCurrent={unref(provider.currentPage)}
-            templates={templates}
+            templates={templates.map(item => ({ ...item }))}
             selection={options?.table?.selection}
             index={options?.table?.index}
             data={unref(provider.tableData)}

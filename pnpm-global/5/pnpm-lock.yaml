@@ -1,0 +1,7 @@
+lockfileVersion: 5.3
+
+specifiers:
+  '@hitotek/fuzzy-ui': ^1.0.17
+
+devDependencies:
+  '@hitotek/fuzzy-ui': link:../../../../../../../usr/local/Cellar/nvm/0.38.0/versions/node/v18.15.0/pnpm-global/5/node_modules/@hitotek/fuzzy-ui
