@@ -43,7 +43,8 @@ export default function createDelete(renderer: Renderer, options: OptionsConfigu
         await httpProvider.get({})
     }
     else {
-      renderer.message.render.warning(response.message)
+      if (response.message)
+        renderer.message.render.warning(response.message)
     }
 
     visibleDeleteDialog.value = false
