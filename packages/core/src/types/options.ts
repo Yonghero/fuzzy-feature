@@ -36,6 +36,7 @@ export interface BaseTemplate {
    * 接口传参操作符
    */
   where?: Where
+  order?: number
   /**
    * 此函数内部注入无需传递，返回值为options的inject的返回值
    * @returns

@@ -73,7 +73,7 @@ export function createViewer(adapters: Adapters) {
       })
 
       const dynamicLayout = computed(() => {
-        injectPlugins(plugins.value, activatedProps)
+        const templates = injectPlugins(plugins.value, activatedProps)
 
         // @ts-expect-error anyway
         const createInjectValues = unref(activatedProps.options).inject ? unref(activatedProps.options)!.inject() : () => ({})
@@ -83,7 +83,7 @@ export function createViewer(adapters: Adapters) {
         const renderer = props.renderer
         const http = props.http
 
-        const { components } = starter({ renderer, http, activatedProps })
+        const { components } = starter({ renderer, http, activatedProps, templates })
 
         return (
           <props.layout

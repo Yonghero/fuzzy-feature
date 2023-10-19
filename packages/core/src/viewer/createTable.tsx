@@ -1,11 +1,11 @@
 import type { Renderer } from 'packages/renderer/types-renderer'
-import { defineComponent, unref } from 'vue'
-import type { OptionsConfiguration } from '../types/options'
-import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesOfVisible, mapTemplatesRenderer, mapTemplatesValue, templateMiddleWare } from '../utils/templates'
-import { AppProviderKey } from '../types/types'
+import type { Ref } from 'vue'
+import { computed, defineComponent, unref } from 'vue'
 import type { DataProvider } from '../types/provider'
 import type { Handlers } from '../types/handlers'
-import { getAppProviderValue } from './provider'
+import type { ActivatedReturnValue } from '../utils/useActivated'
+import type { Templates } from '../types/options'
+import { mapTemplateDefaultValue, mapTemplatesOfFeature, mapTemplatesOfVisible, mapTemplatesRenderer, mapTemplatesValue, templateMiddleWare } from '../utils/templates'
 
 function deleteTypeInTable(templates) {
   return templates.map((tmpl) => {
@@ -14,66 +14,70 @@ function deleteTypeInTable(templates) {
   })
 }
 
-export function createTable(renderer: Renderer, options: OptionsConfiguration, provider: DataProvider, handlers: Handlers, invokeDeleteEvent, invokeUpdateEvent) {
-  const templates = templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplateDefaultValue, deleteTypeInTable, mapTemplatesOfVisible, mapTemplatesValue])(options.templates, 'table')
-
+export function createTable(renderer: Renderer, activatedProps: ActivatedReturnValue, templates: Ref<Templates[]>, provider: DataProvider, handlers: Handlers, invokeDeleteEvent, invokeUpdateEvent) {
   return defineComponent({
     setup() {
-      const deleteVisible = options?.feature?.delete
-      const updateVisible = options?.feature?.update
+      const tableTmpl = computed(() => {
+        return templateMiddleWare([mapTemplatesOfFeature, mapTemplatesRenderer, mapTemplateDefaultValue, deleteTypeInTable, mapTemplatesOfVisible, mapTemplatesValue])(templates.value, 'table')
+      })
 
-      if (deleteVisible || updateVisible) {
-        if (templates.some(tmpl => tmpl.label === '操作'))
-          return
-        templates.push({
-          label: '操作',
-          width: options.table?.actionWidth ?? '150px',
-          value: 'fuzzy-table-action-column',
-          visible: {
-            table: true,
-          },
-          render({ scope }) {
-            // 编辑
-            const UpdateRender = (
-              <renderer.button.render
-                type="primary"
-                link
-                onClick={async () => {
-                  await invokeUpdateEvent({ ...scope.row })
-                }}
-              >
-                { getAppProviderValue(AppProviderKey.Lang).update }
-              </renderer.button.render>
-            )
+      const options = computed(() => unref(activatedProps.options))
 
-            // 删除
-            const DeleteRender = (
-              <>
-                <renderer.button.render
-                  type="danger"
-                  link
-                  onClick={() => invokeDeleteEvent({ ...scope.row })}
-                >
-                  { getAppProviderValue(AppProviderKey.Lang).delete }
-                </renderer.button.render>
-              </>
-            )
+      // const deleteVisible = options.value?.feature?.delete
+      // const updateVisible = options.value?.feature?.update
 
-            // 自定义操作符
-            if (options.table?.actions) {
-              return (
-                options.table.actions(scope, { UpdateRender, DeleteRender })
-              )
-            }
-            return (
-              <div class="w-full flex justify-center items-center gap-x-2">
-                {updateVisible ? UpdateRender : null}
-                {deleteVisible ? DeleteRender : null}
-              </div>
-            )
-          },
-        })
-      }
+      // if (deleteVisible || updateVisible) {
+      //   if (templates.value.some(tmpl => tmpl.label === '操作'))
+      //     return
+      //   templates.value.push({
+      //     label: '操作',
+      //     width: options.value.table?.actionWidth ?? '150px',
+      //     value: 'fuzzy-table-action-column',
+      //     visible: {
+      //       table: true,
+      //     },
+      //     render({ scope }) {
+      //       // 编辑
+      //       const UpdateRender = (
+      //         <renderer.button.render
+      //           type="primary"
+      //           link
+      //           onClick={async () => {
+      //             await invokeUpdateEvent({ ...scope.row })
+      //           }}
+      //         >
+      //           { getAppProviderValue(AppProviderKey.Lang).update }
+      //         </renderer.button.render>
+      //       )
+
+      //       // 删除
+      //       const DeleteRender = (
+      //         <>
+      //           <renderer.button.render
+      //             type="danger"
+      //             link
+      //             onClick={() => invokeDeleteEvent({ ...scope.row })}
+      //           >
+      //             { getAppProviderValue(AppProviderKey.Lang).delete }
+      //           </renderer.button.render>
+      //         </>
+      //       )
+
+      //       // 自定义操作符
+      //       if (options.value.table?.actions) {
+      //         return (
+      //           options.value.table.actions(scope, { UpdateRender, DeleteRender })
+      //         )
+      //       }
+      //       return (
+      //         <div class="w-full flex justify-center items-center gap-x-2">
+      //           {updateVisible ? UpdateRender : null}
+      //           {deleteVisible ? DeleteRender : null}
+      //         </div>
+      //       )
+      //     },
+      //   })
+      // }
 
       function handleSelection(v) {
         handlers && handlers?.onSelection && handlers?.onSelection(v)
@@ -88,9 +92,9 @@ export function createTable(renderer: Renderer, options: OptionsConfiguration, p
           <renderer.table.render
             pageSize={unref(provider.pageSize)}
             pageCurrent={unref(provider.currentPage)}
-            templates={templates.map(item => ({ ...item }))}
-            selection={options?.table?.selection}
-            index={options?.table?.index}
+            templates={tableTmpl.value}
+            selection={options.value?.table?.selection}
+            index={options.value?.table?.index}
             data={unref(provider.tableData)}
             loading={unref(provider.tableLoading)}
             onSelection={handleSelection}

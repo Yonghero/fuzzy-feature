@@ -34,7 +34,8 @@ export interface AppProvider {
 }
 
 export interface FuzzyPlugin {
-  install: (templates: Templates[]) => Templates[]
+  install: (templates: Templates[]) => Templates[] | Promise<Templates[]>
+  setup?: () => void
 }
 
 /**

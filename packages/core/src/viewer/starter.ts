@@ -17,7 +17,7 @@ export interface StarterOptions {
   http: HttpAdapters
 }
 
-export function starter({ renderer, http, activatedProps }) {
+export function starter({ renderer, http, activatedProps, templates }) {
   // 全局数据提供者
   const dataProvider = createDataProvider()
 
@@ -35,7 +35,7 @@ export function starter({ renderer, http, activatedProps }) {
   const { render, invokeDeleteEvent } = createDelete(renderer, unref(activatedProps.options), dataProvider, httpProvider, unref(activatedProps.handlers))
 
   // 创建表格组件
-  const table = createTable(renderer, unref(activatedProps.options), dataProvider, unref(activatedProps.handlers), invokeDeleteEvent, invokeUpdateEvent)
+  const table = createTable(renderer, activatedProps, templates, dataProvider, unref(activatedProps.handlers), invokeDeleteEvent, invokeUpdateEvent)
 
   // 创建分页组件
   const pagination = createPagination(renderer.pagination, unref(activatedProps.options), dataProvider, httpProvider)

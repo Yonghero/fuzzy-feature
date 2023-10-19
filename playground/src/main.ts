@@ -20,6 +20,16 @@ class FixedTemplatesPlugin implements FuzzyPlugin {
     return templates
   }
 }
+class TestPlugin implements FuzzyPlugin {
+  install(templates: Templates[]) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        templates[0].order = 2
+        resolve(templates)
+      }, 500)
+    }) as Promise<Templates[]>
+  }
+}
 
 const fuzzyApp = createFuzzyApp({
   renderer: new FuzzyUIRenderer(),
@@ -37,7 +47,7 @@ const fuzzyApp = createFuzzyApp({
     current: 'current',
     size: 'size',
   },
-  plugins: [new FixedTemplatesPlugin()],
+  plugins: [new FixedTemplatesPlugin(), new TestPlugin()],
 })
 
 const app = createApp(App)
