@@ -6,6 +6,9 @@ import useActionChip from './useActionChip'
 
 export const testOptions = defineConfig({
   id: 'vcenter_2_1_1',
+  dialog: {
+    title: '用户',
+  },
   title: 'tab1',
   api: '/get/api',
   table: {
@@ -109,6 +112,9 @@ export const testOptions = defineConfig({
 })
 
 export const testOptions2 = defineConfig({
+  dialog: {
+    title: '用户',
+  },
   id: 'vcenter_2_1_2',
   title: 'Tab2',
   api: '/get/api/2',

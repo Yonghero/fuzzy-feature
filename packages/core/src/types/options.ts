@@ -144,4 +144,10 @@ export interface OptionsConfiguration {
      */
     actions?: (scope, { UpdateRender, DeleteRender }) => VNode[]
   }
+  /**
+   * 配置对话框配置
+   */
+  dialog: {
+    title: string | Ref<string>
+  }
 }
