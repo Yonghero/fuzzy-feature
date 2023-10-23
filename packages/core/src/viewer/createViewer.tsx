@@ -10,6 +10,7 @@ import { injectPlugins } from '../utils/injectPlugins'
 import type { Adapters, FuzzyPlugin } from '../types/types'
 import wrappedSlots from '../utils/wrappedSlots'
 import injectValues from '../utils/injectValues'
+import { executeAttrFunction } from '../utils/executeAttrFunction'
 import { injectAppProvider } from './provider'
 import { starter } from './starter'
 import { mergeHandlers, mergeOptions } from './test-options'
@@ -79,6 +80,8 @@ export function createViewer(adapters: Adapters) {
         const createInjectValues = unref(activatedProps.options).inject ? unref(activatedProps.options)!.inject() : () => ({})
 
         injectValues(activatedProps, createInjectValues)
+
+        executeAttrFunction(activatedProps)
 
         const renderer = props.renderer
         const http = props.http

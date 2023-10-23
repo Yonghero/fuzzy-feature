@@ -9,10 +9,6 @@ export function injectPlugins(plugins: FuzzyPlugin[], activatedProps: ActivatedR
   const templates = ref(activatedProps?.options?.value?.templates)
 
   if (hasPlugins && hasTemplates) {
-    // (plugins!).reduce((templates, plugin) => {
-    //   return plugin.install(templates)
-    // }, activatedProps.options.value.templates)
-
     const installQueue = [] as any
     plugins.forEach((plugin) => {
       installQueue.push(plugin.install)

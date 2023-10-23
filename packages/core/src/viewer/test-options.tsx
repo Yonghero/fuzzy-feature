@@ -21,9 +21,10 @@ export const testOptions = defineConfig({
   },
   inject() {
     const count = ref(1)
-
+    const dis = ref(false)
     return () => ({
       count,
+      dis,
     })
   },
   slots: {
@@ -42,6 +43,10 @@ export const testOptions = defineConfig({
       label: '姓名',
       value: 'name',
       type: 'input',
+      disabled() {
+        // @ts-expect-error anyway
+        return this.inject().dis
+      },
       require: true,
       rules: [{
         min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur',
@@ -197,6 +202,11 @@ export const handlers1: Handlers = {
   },
   async updateBeforePop({ data }) {
     console.log('updateBeforePop')
+    return data
+  },
+  async createBeforePop({ data }) {
+    // @ts-expect-error anyway
+    this.inject().dis.value = !this.inject().dis.value
     return data
   },
   async updateConfirm({ data }) {

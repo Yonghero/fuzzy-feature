@@ -59,7 +59,7 @@ export interface BaseTemplate {
   /**
    * 是否禁用
    */
-  disabled?: boolean
+  disabled?: boolean | (() => boolean)
   type?: string
   /**
    * 是否在增删改查中包含此字段
