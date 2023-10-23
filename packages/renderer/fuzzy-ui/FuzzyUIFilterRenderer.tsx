@@ -32,7 +32,7 @@ export class FuzzyUIFilterRenderer implements FilterRenderer {
       const inputVal = ref('')
       const debounced = refDebounced(inputVal, 500)
 
-      watch(debounced, val => emit('inputChange', val))
+      watch(debounced, useDebounceFn(val => emit('inputChange', val)))
 
       const onKeydown = useDebounceFn((e) => {
         if (e.key === 'Enter')

@@ -13,6 +13,7 @@ export function createFilter(Filter: FilterRenderer, options: OptionsConfigurati
 
   // 其他类型的tmpl查询
   function onChange(pairs) {
+    console.log('filter-change')
     httpProvider.get({ ...pairs })
   }
 
@@ -23,7 +24,7 @@ export function createFilter(Filter: FilterRenderer, options: OptionsConfigurati
     //   pre[tmpl.value] = inputVal
     //   return pre
     // }, {})
-
+    console.log('filter-enter')
     const reqParams = inputSwitchValues.reduce((req, item) => {
       if (item.value)
         req[item.id] = inputVal
