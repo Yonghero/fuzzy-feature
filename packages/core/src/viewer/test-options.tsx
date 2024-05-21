@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, unref } from 'vue'
 import type { Handlers } from '../types/handlers'
 import { defineConfig } from '../utils/defineConfig'
 import { mergeFuzzyOptions } from '../utils/merge'
@@ -39,6 +39,33 @@ export const testOptions = defineConfig({
     create: true,
   },
   templates: [
+    {
+      type: 'cascader',
+      label: '联级选择',
+      value: 'select',
+      disabled: true,
+      options: [
+        {
+          value: 'value1',
+          label: 'label1',
+        },
+        {
+          value: 'value2',
+          label: 'label2',
+        },
+      ],
+      visible: {
+        table: true,
+        filter: false,
+        update: true,
+        create: true,
+      },
+      renderer: {
+        create(props) {
+          return <el-cascader v-model={props.model[props.value]} disabled options={unref(props.options)} />
+        },
+      },
+    },
     {
       label: '姓名',
       value: 'name',
